@@ -45,7 +45,6 @@
       "inet6_address": "fdfe:dcba:9876::0/126",
       "stack": "system",
       "auto_route": true,
-      "strict_route": true,
       "sniff": true,
       "platform": {
         "http_proxy": {"enabled": true, "server": "0.0.0.0", "server_port": 7890}
