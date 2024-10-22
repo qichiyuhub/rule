@@ -1,8 +1,10 @@
-# 内容：OpenAi Bard anthropic
+# 内容 OpenAi Bard anthropic claude
+
 # 域名关键字匹配
 DOMAIN-KEYWORD,openai
 DOMAIN-KEYWORD,anthropic
 DOMAIN-KEYWORD,Claude
+
 # 域名后缀匹配
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,chatgpt.com
