@@ -1,6 +1,3 @@
-# 油管频道  七尺宇  
-# 电报群   https://t.me/qichiyuchat  
-# 本规则仅为视频演示使用 实际使用请根据自己情况进行修改 如果问题请群里反馈！
 proxy-providers:
   Airport_01:
     type: http
