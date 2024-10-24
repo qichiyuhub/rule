@@ -25,7 +25,6 @@ unified-delay: true
 tcp-concurrent: true
   
 geodata-mode: false
-# GEO 文件加载模式（standard：标准加载器/memconservative：专为内存受限 (小内存) 设备优化的加载器 (默认值)）
 geodata-loader: standard
 geo-auto-update: true
 geo-update-interval: 48
