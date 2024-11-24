@@ -5,7 +5,7 @@
   },
   "experimental": {
     "clash_api": {
-      "external_controller": "0.0.0.0:9090",
+      "external_controller": "0.0.0.0:9095",
       "external_ui": "ui",
       "secret": "",
       "external_ui_download_url": "https://mirror.ghproxy.com/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
