@@ -35,7 +35,7 @@
      {"clash_mode": "Direct", "server": "dns_direct", "action": "route"},
      {"clash_mode": "Global", "server": "dns_proxy", "action": "route"},
      {"domain_suffix": ["micu.hk"], "server": "dns_direct", "action": "route"},
-     {"rule_set": ["geosite-cn", "geosite-category-games-cn", "geosite-category-game-accelerator-cn"], "server": "dns_direct", "action": "route"},
+     {"rule_set": "geosite-cn", "server": "dns_direct", "action": "route"},
      {"rule_set": ["geosite-geolocation-!cn"], "server": "dns_proxy", "action": "route"}
    ],
    "final": "dns_proxy",
