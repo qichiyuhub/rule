@@ -26,48 +26,28 @@
    "servers": 
    [
      {"tag": "dns_direct", "address": "223.5.5.5", "address_strategy": "ipv4_only", "strategy": "ipv4_only", "detour": "🎯 全球直连"},
-     {"tag": "dns_proxy", "address": "tls://8.8.8.8", "address_strategy": "ipv4_only", "strategy": "ipv4_only", "detour": "🚀 节点选择"},
-     {"tag": "dns_block", "address": "rcode://success"}
+     {"tag": "dns_proxy", "address": "tls://8.8.8.8", "address_strategy": "ipv4_only", "strategy": "ipv4_only", "detour": "🚀 节点选择"}
    ],
    "rules": 
    [
-     {"outbound": "any", "server": "dns_direct", "action": "route", "disable_cache": true},
-     {"clash_mode": "Direct", "server": "dns_direct", "action": "route"},
-     {"clash_mode": "Global", "server": "dns_proxy", "action": "route"},
-     {"domain_suffix": ["micu.hk"], "server": "dns_direct", "action": "route"},
-     {"rule_set": "geosite-cn", "server": "dns_direct", "action": "route"},
-     {"rule_set": ["geosite-geolocation-!cn"], "server": "dns_proxy", "action": "route"}
+     {"outbound": "any", "action": "route", "server": "dns_direct", "disable_cache": true},
+     {"clash_mode": "Direct", "action": "route", "server": "dns_direct"},
+     {"clash_mode": "Global", "action": "route", "server": "dns_proxy"},
+     {"rule_set": "geosite-cn", "action": "route","server": "dns_direct"},
+     {"rule_set": "geosite-geolocation-!cn", "action": "route", "server": "dns_proxy"}
    ],
    "final": "dns_proxy",
    "strategy": "ipv4_only"
 },
 
-    "inbounds": [
-    {
-      "type": "tun",
-      "address": "172.19.0.1/30",
-      "mtu": 9000,
-      "auto_route": true,
-      "auto_redirect": true,
-      "sniff": true,
-      "endpoint_independent_nat": false,
-      "stack": "system",
-      "platform": {
-        "http_proxy": {
-          "enabled": true,
-          "server": "127.0.0.1",
-          "server_port": 2080
-        }
-      }
-    },
-    {
-      "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 2080,
-      "sniff": true,
-      "users": []
-    }
-  ],
+"inbounds": [
+  {
+    "type": "tproxy",
+    "tag": "tproxy-in",
+    "listen": "0.0.0.0",
+    "listen_port": 7895
+  }
+],
 
   "outbounds": [
     { "tag": "🚀 节点选择", "type": "selector", "outbounds": ["🔯 香港自动", "🇭🇰 香港节点", "🇯🇵 日本节点", "🇺🇲 美国节点", "🐸 手动切换", "♻️ 自动选择", "🎯 全球直连"] },
@@ -98,24 +78,24 @@
    "final": "🐠 漏网之鱼",
    "rules": 
    [
+     {"action": "sniff"},
      {"protocol": "dns", "action": "hijack-dns"},
      {"clash_mode": "direct", "action": "route", "outbound": "🎯 全球直连"},
      {"clash_mode": "global", "action": "route", "outbound": "GLOBAL"},
-     {"domain_suffix": ["micu.hk"], "action": "route", "outbound": "🎯 全球直连"},
-     {"domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"], "server": "dns_direct", "action": "resolve"},
-     {"ip_is_private": true, "outbound": "🎯 全球直连", "action": "route"},
-     {"rule_set": "geosite-chat", "outbound": "🤖 OpenAI", "action": "route"},
-     {"rule_set": "geosite-youtube", "outbound": "📹 YouTube", "action": "route"},
-     {"rule_set": "geosite-github", "outbound": "👨‍💻 Github", "action": "route"},
-     {"rule_set": ["geosite-google", "geoip-google"], "outbound": "🍀 Google", "action": "route"},
-     {"rule_set": ["geosite-telegram", "geoip-telegram"], "outbound": "📲 Telegram", "action": "route"},
-     {"rule_set": "geosite-tiktok", "outbound": "🎵 TikTok", "action": "route"},
-     {"rule_set": ["geosite-netflix", "geoip-netflix"], "outbound": "🎥 Netflix", "action": "route"},
-     {"rule_set": ["geosite-apple", "geoip-apple"], "outbound": "🍏 Apple", "action": "route"},
-     {"rule_set": "geosite-onedrive", "outbound": "🐬 OneDrive", "action": "route"},
-     {"rule_set": "geosite-microsoft", "outbound": "🪟 Microsoft", "action": "route"},
-     {"rule_set": "geosite-geolocation-!cn", "outbound": "🚀 节点选择", "action": "route"},
-     {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "🎯 全球直连", "action": "route"}
+     {"domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"], "action": "route", "outbound": "🎯 全球直连"},
+     {"rule_set": "geosite-private", "action": "route", "outbound": "🎯 全球直连"},
+     {"rule_set": "geosite-chat", "action": "route", "outbound": "🤖 OpenAI"},
+     {"rule_set": "geosite-youtube", "action": "route", "outbound": "📹 YouTube"},
+     {"rule_set": "geosite-github", "action": "route", "outbound": "👨‍💻 Github"},
+     {"rule_set": ["geosite-google", "geoip-google"], "action": "route", "outbound": "🍀 Google"},
+     {"rule_set": ["geosite-telegram", "geoip-telegram"], "action": "route", "outbound": "📲 Telegram"},
+     {"rule_set": "geosite-tiktok", "action": "route", "outbound": "🎵 TikTok"},
+     {"rule_set": ["geosite-netflix", "geoip-netflix"], "action": "route", "outbound": "🎥 Netflix"},
+     {"rule_set": ["geosite-apple", "geoip-apple"], "action": "route", "outbound": "🍏 Apple"},
+     {"rule_set": "geosite-onedrive", "action": "route", "outbound": "🐬 OneDrive"},
+     {"rule_set": "geosite-microsoft", "action": "route", "outbound": "🪟 Microsoft"},
+     {"rule_set": "geosite-geolocation-!cn", "action": "route", "outbound": "🚀 节点选择"},
+     {"rule_set": ["geoip-cn", "geosite-cn"], "action": "route", "outbound": "🎯 全球直连"}
    ],
     
     "rule_set": [
