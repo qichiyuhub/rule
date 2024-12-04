@@ -30,11 +30,11 @@
    ],
    "rules": 
    [
-     {"outbound": "any", "action": "route", "server": "dns_direct", "disable_cache": true},
-     {"clash_mode": "Direct", "action": "route", "server": "dns_direct"},
-     {"clash_mode": "Global", "action": "route", "server": "dns_proxy"},
+     {"outbound": "any", "server": "dns_direct", "disable_cache": true},
+     {"clash_mode": "Direct", "server": "dns_direct"},
+     {"clash_mode": "Global", "server": "dns_proxy"},
      {"rule_set": "geosite-cn", "action": "route","server": "dns_direct"},
-     {"rule_set": "geosite-geolocation-!cn", "action": "route", "server": "dns_proxy"}
+     {"rule_set": "geosite-geolocation-!cn", "server": "dns_proxy"}
    ],
    "final": "dns_proxy",
    "strategy": "ipv4_only"
@@ -98,22 +98,22 @@
    "rules": 
    [
      {"protocol": "dns", "action": "hijack-dns"},
-     {"clash_mode": "direct", "action": "route", "outbound": "🎯 全球直连"},
-     {"clash_mode": "global", "action": "route", "outbound": "GLOBAL"},
-     {"domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"], "action": "route", "outbound": "🎯 全球直连"},
-     {"rule_set": "geosite-private", "action": "route", "outbound": "🎯 全球直连"},
-     {"rule_set": "geosite-chat", "action": "route", "outbound": "🤖 OpenAI"},
-     {"rule_set": "geosite-youtube", "action": "route", "outbound": "📹 YouTube"},
-     {"rule_set": "geosite-github", "action": "route", "outbound": "👨‍💻 Github"},
-     {"rule_set": ["geosite-google", "geoip-google"], "action": "route", "outbound": "🍀 Google"},
-     {"rule_set": ["geosite-telegram", "geoip-telegram"], "action": "route", "outbound": "📲 Telegram"},
-     {"rule_set": "geosite-tiktok", "action": "route", "outbound": "🎵 TikTok"},
-     {"rule_set": ["geosite-netflix", "geoip-netflix"], "action": "route", "outbound": "🎥 Netflix"},
-     {"rule_set": ["geosite-apple", "geoip-apple"], "action": "route", "outbound": "🍏 Apple"},
-     {"rule_set": "geosite-onedrive", "action": "route", "outbound": "🐬 OneDrive"},
-     {"rule_set": "geosite-microsoft", "action": "route", "outbound": "🪟 Microsoft"},
-     {"rule_set": "geosite-geolocation-!cn", "action": "route", "outbound": "🚀 节点选择"},
-     {"rule_set": ["geoip-cn", "geosite-cn"], "action": "route", "outbound": "🎯 全球直连"}
+     {"clash_mode": "direct", "outbound": "🎯 全球直连"},
+     {"clash_mode": "global", "outbound": "GLOBAL"},
+     {"domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"], "outbound": "🎯 全球直连"},
+     {"rule_set": "geosite-private", "outbound": "🎯 全球直连"},
+     {"rule_set": "geosite-chat", "outbound": "🤖 OpenAI"},
+     {"rule_set": "geosite-youtube", "outbound": "📹 YouTube"},
+     {"rule_set": "geosite-github", "outbound": "👨‍💻 Github"},
+     {"rule_set": ["geosite-google", "geoip-google"], "outbound": "🍀 Google"},
+     {"rule_set": ["geosite-telegram", "geoip-telegram"], "outbound": "📲 Telegram"},
+     {"rule_set": "geosite-tiktok", "outbound": "🎵 TikTok"},
+     {"rule_set": ["geosite-netflix", "geoip-netflix"], "outbound": "🎥 Netflix"},
+     {"rule_set": ["geosite-apple", "geoip-apple"], "outbound": "🍏 Apple"},
+     {"rule_set": "geosite-onedrive", "outbound": "🐬 OneDrive"},
+     {"rule_set": "geosite-microsoft", "outbound": "🪟 Microsoft"},
+     {"rule_set": "geosite-geolocation-!cn", "outbound": "🚀 节点选择"},
+     {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "🎯 全球直连"}
    ],
     
     "rule_set": [
