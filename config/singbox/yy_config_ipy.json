@@ -55,7 +55,6 @@
 
   "outbounds": [
     { "tag": "🚀 节点选择", "type": "selector", "outbounds": ["🐸 手动切换", "♻️ 自动选择", "🎯 全球直连"]},
-    { "tag": "gfwblak", "type": "selector", "outbounds": ["🐸 手动切换", "♻️ 自动选择", "🎯 全球直连"]},
     { "tag": "📹 YouTube", "type": "selector", "outbounds": ["🚀 节点选择", "♻️ 自动选择", "🐸 手动切换"]},
     { "tag": "🤖 OpenAI", "type": "selector", "outbounds": ["🚀 节点选择", "♻️ 自动选择", "🐸 手动切换"]},
     { "tag": "🍀 Google", "type": "selector", "outbounds": ["🚀 节点选择", "♻️ 自动选择", "🐸 手动切换"]},
@@ -66,6 +65,7 @@
     { "tag": "🎥 Netflix", "type": "selector", "outbounds": ["🚀 节点选择", "♻️ 自动选择", "🐸 手动切换"]},
     { "tag": "📲 Telegram", "type": "selector", "outbounds": ["🚀 节点选择", "♻️ 自动选择", "🐸 手动切换"]},
     { "tag": "🍏 Apple", "type": "selector", "outbounds": ["🎯 全球直连"]},
+	{ "tag": "gfwblak", "type": "selector", "outbounds": ["🐸 手动切换", "♻️ 自动选择", "🎯 全球直连"]},
     { "tag": "🐠 漏网之鱼", "type": "selector", "outbounds": ["🚀 节点选择","🎯 全球直连"]},
     { "tag": "🐸 手动切换", "type": "selector", "outbounds": ["{all}"]},
     { "tag": "♻️ 自动选择", "type": "urltest", "outbounds": ["{all}"], "url": "http://www.gstatic.com/generate_204", "interval": "10m", "tolerance": 50 },
