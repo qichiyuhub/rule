@@ -67,7 +67,7 @@
     { "tag": "🍏 Apple", "type": "selector", "outbounds": ["🎯 全球直连"},
     { "tag": "🐠 漏网之鱼", "type": "selector", "outbounds": ["🚀 节点选择","🎯 全球直连"]},
     { "tag": "🐸 手动切换", "type": "selector", "outbounds": ["{all}"]},
-    { "tag": "♻️ 自动选择", "type": "urltest", "outbounds": ["{all}"], "url": "http://www.gstatic.com/generate_204", "interval": "10m", "tolerance": 50},
+    { "tag": "♻️ 自动选择", "type": "urltest", "outbounds": ["{all}"], "url": "http://www.gstatic.com/generate_204", "interval": "10m", "tolerance": 50 },
     { "tag": "GLOBAL", "type": "selector", "outbounds": ["{all}"]},
     { "tag": "🎯 全球直连", "type": "direct" },
     { "tag": "dns-out", "type": "dns" }
