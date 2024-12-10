@@ -29,13 +29,10 @@
 				  { "rule_set": "geoip-cn" } ],
         "server": "proxyDns",
         "client_subnet": "114.114.114.114/24"
-       }
+      }
     ],
     "final": "proxyDns",
-    "strategy": "ipv4_only",
-    "disable_cache": false,
-    "disable_expire": false,
-    "independent_cache": false
+    "strategy": "ipv4_only"
   },
 
     "inbounds": [
@@ -45,7 +42,7 @@
       "mtu": 9000,
       "auto_route": true,
       "sniff": true,
-      "stack": "mixed",
+      "stack": "system",
 	  "strict_route": true,
       "platform": {
         "http_proxy": {
@@ -111,7 +108,6 @@
       { "rule_set": ["geosite-gfw"], "outbound": "GfwBan" },
       { "rule_set": "geosite-geolocation-!cn", "outbound": "OutChina" },
       { "rule_set": ["geoip-cn", "geosite-cn"], "outbound": "🎯 全球直连" }
-
     ],
     
     "rule_set": [
