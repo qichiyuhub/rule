@@ -1,7 +1,7 @@
 {
   "log": {
     "disabled": false,
-    "level": "debug",
+    "level": "info",
     "timestamp": true
   },
   
@@ -12,56 +12,78 @@
   },
   
   "dns": {
-    "servers": [
-      {"tag": "proxyDns", "address": "https://dns.google/dns-query", "address_resolver": "defaultDns", "address_strategy": "ipv4_only", "client_subnet": "1.0.1.0", "detour": "🚀 节点选择" },
-      {"tag": "localDns", "address": "https://120.53.53.53/dns-query", "address_resolver": "defaultDns", "address_strategy": "ipv4_only", "detour": "🎯 全球直连"},
-      {"tag": "defaultDns", "address": "119.29.29.29", "address_strategy": "ipv4_only", "detour": "🎯 全球直连"},
-      {"tag": "block", "address": "rcode://success"}
-    ],
-    "rules": [
-      { "outbound": "any", "server": "defaultDns", "disable_cache": true },
-      { "clash_mode": "direct", "server": "localDns" },
-      { "clash_mode": "global", "server": "proxyDns" },
-      { "rule_set": "geosite-ads", "server": "block"},	  
-      { "rule_set": "geosite-cn", "server": "localDns" },
-      {
-        "type": "logical", "mode": "and",
-        "rules": [{ "rule_set": "geosite-geolocation-!cn", "invert": true },
-				  { "rule_set": "geoip-cn" } ],
-        "server": "proxyDns",
-        "client_subnet": "114.114.114.114/24"
-      }
-    ],
-    "final": "proxyDns",
-    "strategy": "ipv4_only"
-  },
+      "servers": [
+        {
+          "tag": "proxyDns",
+          "address": "tls://8.8.8.8",
+          "detour": "🚀 节点选择"
+        },
+        {
+          "tag": "localDns",
+          "address": "https://223.5.5.5/dns-query",
+          "detour": "🎯 全球直连"
+        },
+        {
+          "tag": "block",
+          "address": "rcode://success"
+        }
+      ],
+      "rules": [
+        {
+          "rule_set": "geosite-category-ads-all",
+          "server": "block"
+        },
+        {
+          "outbound": "any",
+          "server": "localDns",
+          "disable_cache": true
+        },
+        {
+          "rule_set": "geosite-cn",
+          "server": "localDns"
+        },   
+        {
+          "clash_mode": "direct",
+          "server": "localDns"
+        },
+        {
+          "clash_mode": "global",
+          "server": "proxyDns"
+        },
+        {
+          "rule_set": "geosite-geolocation-!cn",
+          "server": "proxyDns"
+        }
+      ],
+      "final": "localDns",
+      "strategy": "ipv4_only"
+    },
 
     "inbounds": [
-      {
-        "type": "tun",
-        "address": "172.19.0.1/30",
-        "mtu": 9000,
-        "auto_route": true,
-        "strict_route": true,
-        "sniff": true,
-        "endpoint_independent_nat": false,
-        "stack": "system",
-        "platform": {
-          "http_proxy": {
-            "enabled": true,
-            "server": "127.0.0.1",
-            "server_port": 2080
-          }
+    {
+      "type": "tun",
+      "address": "172.19.0.1/30",
+      "mtu": 9000,
+      "auto_route": true,
+      "sniff": true,
+      "stack": "system",
+	  "strict_route": true,
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 2080
         }
-      },
-      {
-        "type": "mixed",
-        "listen": "127.0.0.1",
-        "listen_port": 2080,
-        "sniff": true,
-        "users": []
       }
-    ],
+    },
+    {
+      "type": "mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 2080,
+      "sniff": true,
+      "users": []
+    }
+  ],
 
   "outbounds": [
     { "tag": "🚀 节点选择", "type": "selector", "outbounds": ["♻️ 自动选择", "🐸 手动切换", "🎯 全球直连"]},
