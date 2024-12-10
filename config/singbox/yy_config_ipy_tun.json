@@ -79,7 +79,7 @@
     { "tag": "OutChina", "type": "selector", "outbounds": ["♻️ 自动选择", "🐸 手动切换", "🎯 全球直连", "{all}"]},
     { "tag": "🐠 漏网之鱼", "type": "selector", "outbounds": ["🎯 全球直连", "🚀 节点选择"]},
     { "tag": "🐸 手动切换", "type": "selector", "outbounds": ["{all}"]},
-    { "tag": "♻️ 自动选择", "type": "urltest", "outbounds": ["{all}"], "filter": [{ "action": "exclude", "keywords": ["G1|G7|g0|g1|g2|g7"] }], "url": "http://www.gstatic.com/generate_204", "interval": "10m", "tolerance": 50 },
+    { "tag": "♻️ 自动选择", "type": "urltest", "outbounds": ["{all}"], "filter": [{ "action": "exclude", "keywords": ["G1|G7|g0|g1|g2|g7|A0|A3"] }], "url": "http://www.gstatic.com/generate_204", "interval": "10m", "tolerance": 50 },
     { "tag": "GLOBAL", "type": "selector", "outbounds": ["{all}", "♻️ 自动选择"]},
     { "tag": "🎯 全球直连", "type": "direct" },
     { "tag": "dns-out", "type": "dns" },
