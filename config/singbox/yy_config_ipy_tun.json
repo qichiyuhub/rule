@@ -19,27 +19,11 @@
       {"tag": "block", "address": "rcode://success"}
     ],
     "rules": [
-        {
-          "rule_set": "geosite-ads",
-          "server": "block"
-        },
-        {
-          "outbound": "any",
-          "server": "defaultDns",
-          "disable_cache": true
-        },
-        {
-          "rule_set": "geosite-cn",
-          "server": "localDns"
-        },   
-        {
-          "clash_mode": "direct",
-          "server": "localDns"
-        },
-        {
-          "clash_mode": "global",
-          "server": "proxyDns"
-        },
+      { "outbound": "any", "server": "localDns", "disable_cache": true },
+      { "clash_mode": "direct", "server": "localDns" },
+      { "clash_mode": "global", "server": "proxyDns" },
+      { "rule_set": "geosite-ads", "server": "block"},	  
+      { "rule_set": "geosite-cn", "server": "localDns" },
       {
         "type": "logical", "mode": "and",
         "rules": [{ "rule_set": "geosite-geolocation-!cn", "invert": true },
@@ -47,7 +31,7 @@
         "server": "proxyDns",
         "client_subnet": "114.114.114.114/24"
       }
-      ],
+    ],
     "final": "proxyDns",
     "strategy": "ipv4_only"
   },
