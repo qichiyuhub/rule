@@ -25,7 +25,7 @@
         },
         {
           "outbound": "any",
-          "server": "localDns",
+          "server": "defaultDns",
           "disable_cache": true
         },
         {
