@@ -19,10 +19,10 @@
       {"tag": "block", "address": "rcode://success"}
     ],
     "rules": [
+      { "rule_set": "geosite-ads", "server": "block"},	
       { "outbound": "any", "server": "defaultDns", "disable_cache": true },
       { "clash_mode": "direct", "server": "localDns" },
       { "clash_mode": "global", "server": "proxyDns" },
-      { "rule_set": "geosite-ads", "server": "block"},	  
       { "rule_set": "geosite-cn", "server": "localDns" },
       { "rule_set": "geosite-geolocation-!cn", "server": "proxyDns" }
     ],
