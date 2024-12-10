@@ -23,17 +23,13 @@
       { "clash_mode": "global", "server": "proxyDns" },
       { "rule_set": "geosite-ads", "server": "block"},	  
       { "rule_set": "geosite-cn", "server": "localDns" },
-      // { "rule_set": "geosite-geolocation-!cn", "server": "proxyDns" }
-	  // 当域名是中国的域名（不在 geolocation-!cn 集合中）与 IP 地址是中国的 IP 地址时，使用 Google DNS 服务器进行解析，并使用 114.114.114.114/24 作为客户端子网。
-	  // 为了处理一些特殊情况，比如某些中国域名可能解析到国外 IP 地址，通过这个规则可以确保使用 Google DNS 来解析这些特殊的中国域名，同时告诉 Google DNS 服务器客户端位于中国
-	  // 通过 client_subnet），以获得更准确的 DNS 解析结果。
-	  {
+      {
         "type": "logical", "mode": "and",
         "rules": [{ "rule_set": "geosite-geolocation-!cn", "invert": true },
 				  { "rule_set": "geoip-cn" } ],
         "server": "proxyDns",
         "client_subnet": "114.114.114.114/24"
-      }
+       }
     ],
     "final": "proxyDns",
     "strategy": "ipv4_only",
