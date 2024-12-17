@@ -8,7 +8,7 @@
       "external_controller": "0.0.0.0:9095",
       "external_ui": "ui",
       "secret": "",
-      "external_ui_download_url": "https://mirror.ghproxy.com/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "🎯 全球直连",
       "default_mode": "rule"
     },
