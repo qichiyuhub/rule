@@ -135,4 +135,4 @@
         { "tag": "geoip-private", "type": "remote", "format": "binary", "url": "https://git.rdn.us.kg/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/private.srs", "download_detour": "🎯 全球直连" }
       ]
     }
-  }
+}
