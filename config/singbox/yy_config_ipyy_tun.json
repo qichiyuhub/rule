@@ -92,6 +92,7 @@
       "rules": [
         { "type": "logical", "mode": "or", "rules": [{ "port": 53 }, { "protocol": "dns" }], "outbound": "dns-out" },
         { "rule_set": ["geosite-ads"], "outbound": "AdBlock" },
+        { "type": "field", "port": "21115-21119", "outbound": "🎯 全球直连"},
         { "clash_mode": "direct", "outbound": "🎯 全球直连" },
         { "clash_mode": "global", "outbound": "GLOBAL" },
         { "domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"], "outbound": "🎯 全球直连" },
