@@ -1,0 +1,35 @@
+name: Run Container and Store Output
+
+on:
+  workflow_dispatch:
+    inputs:
+      subscriptionAddress:
+        description: '订阅地址'
+        default: '机场地址,必须手动填写'
+      stencilFile:
+        description: '转换模板文件'
+        default: 'https://raw.githubusercontent.com/galendu/rule/refs/heads/master/config/singbox/config_tproxy_galendu.json'
+jobs:
+  run-container:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Start container
+        run: |
+          docker run -d --name sing-box-sub --privileged --network host jwy8645/sing-box-subscribe:amd64
+
+      - name: Wait for container to start
+        run: sleep 5
+
+      - name: create config-tun-remote.json
+        run: curl -L "http://127.0.0.1:5000/config/${{ github.event.inputs.subscriptionAddress }}&file=${{ github.event.inputs.stencilFile }}" -o config.json
+
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.5.0
+        with:
+          name: singbox-config
+          path: config.json
