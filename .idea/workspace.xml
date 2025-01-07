@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a00d1d1-0d12-45e2-a437-fdfa113250c6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/sing-box-new/config_run.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/sing-box-new/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/createconfig/github-action.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/createconfig/sing-box.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../private/.github/workflows/sing-box.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../private/.github/workflows/sing-box.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/config-P.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/config-P.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/config_iphone.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/config_iphone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/config_tproxy.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/config_tproxy.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/config_tproxy_dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/config_tproxy_dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/config_tproxyfakeip_dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/config_tproxyfakeip_dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/config_tun.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/config_tun.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/config_tun_dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/config_tun_dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/config_tun_zj_dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/config_tun_zj_dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/singbox/homeproxy" beforeDir="false" afterPath="$PROJECT_DIR$/config/singbox/homeproxy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,23 +24,23 @@
   </component>
   <component name="GOROOT" url="file://$PROJECT_DIR$/../../../program/go" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../private" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "galendu"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;galendu&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/galendu/rule.git",
-    "accountId": "9d5dcd20-6a3d-426f-ab31-c3f4206d54ca"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/galendu/rule.git&quot;,
+    &quot;accountId&quot;: &quot;9d5dcd20-6a3d-426f-ab31-c3f4206d54ca&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2rFAEpcYYyirUQJM1Rvto6XiAh9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,7 +53,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "git-widget-placeholder": "developer",
+    "git-widget-placeholder": "main",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "D:/工作/project/private",
