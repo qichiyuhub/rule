@@ -109,7 +109,8 @@
         { "rule_set": ["geoip-telegram", "geosite-telegram"], "outbound": "📲 Telegram" },
         { "rule_set": ["geoip-cn", "geosite-cn"], "outbound": "🎯 全球直连" },
         { "rule_set": ["geosite-gfw"], "outbound": "GfwBan" },
-        { "rule_set": "geosite-geolocation-!cn", "outbound": "OutChina" }
+        { "rule_set": "geosite-geolocation-!cn", "outbound": "OutChina" },
+        { "rule_set": "geosite-bank-cn", "outbound": "🎯 全球直连" }
       ],
       
       "rule_set": [
@@ -133,7 +134,8 @@
         { "tag": "geoip-netflix", "type": "remote", "format": "binary", "url": "https://git.rdn.us.kg/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/netflix.srs", "download_detour": "🎯 全球直连" },     
         { "tag": "geoip-apple", "type": "remote", "format": "binary", "url": "https://git.rdn.us.kg/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/apple.srs", "download_detour": "🎯 全球直连" },
         { "tag": "geoip-cn", "type": "remote", "format": "binary", "url": "https://git.rdn.us.kg/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs", "download_detour": "🎯 全球直连" },
-        { "tag": "geoip-private", "type": "remote", "format": "binary", "url": "https://git.rdn.us.kg/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/private.srs", "download_detour": "🎯 全球直连" }
+        { "tag": "geoip-private", "type": "remote", "format": "binary", "url": "https://git.rdn.us.kg/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/private.srs", "download_detour": "🎯 全球直连" },
+        { "tag": "geosite-bank-cn", "type": "remote", "format": "binary", "url": "https://git.rdn.us.kg/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-bank-cn.srs", "download_detour": "🎯 全球直连" }
       ]
     }
 }
