@@ -22,7 +22,6 @@
             { "rule_set": "geosite-ads", "server": "block"},		
             { "outbound": "any", "server": "localDns", "disable_cache": true },
             { "rule_set": "geosite-cn", "server": "localDns" },
-            { "geosite": [ "cn" ], "server": "localDns" },
             { "clash_mode": "direct", "server": "localDns" },
             { "clash_mode": "global", "server": "proxyDns" }
         ],
