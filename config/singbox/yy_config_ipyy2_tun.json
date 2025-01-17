@@ -11,13 +11,7 @@
       }
     },
 	
-	{
-	 "doh.pub": [ "119.29.29.29", "223.5.5.5", "223.6.6.6", "1.12.12.12", "120.53.53.53", "2402:4e00::" ]
-	},    
-		
     "dns": {
-		
-	
       "servers": [
         {"tag": "proxyDns", "address": "https://dns.google/dns-query", "address_resolver": "defaultDns", "address_strategy": "ipv4_only", "client_subnet": "1.0.1.0", "detour": "🚀 节点选择" },
         {"tag": "localDns", "address": "h3://dns.alidns.com/dns-query", "address_resolver": "defaultDns", "address_strategy": "ipv4_only", "detour": "🎯 全球直连"},
