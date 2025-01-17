@@ -23,13 +23,7 @@
             { "outbound": "any", "server": "localDns", "disable_cache": true },
             { "rule_set": "geosite-cn", "server": "localDns" },		  
             { "clash_mode": "direct", "server": "localDns" },
-            { "clash_mode": "global", "server": "proxyDns" },
-            {
-              "type": "logical", "mode": "and",
-              "rules": [{ "rule_set": "geosite-geolocation-!cn", "invert": true }],
-              "server": "proxyDns",
-              "client_subnet": "114.114.114.114/24"
-            }
+            { "clash_mode": "global", "server": "proxyDns" }
         ],
       "final": "proxyDns",
       "strategy": "ipv4_only"
