@@ -35,39 +35,37 @@
     "strategy": "ipv4_only"
   },
 
-    "inbounds": [
-    {
-      "type": "tun",
-      "address": "172.19.0.1/30",
-      "mtu": 9000,
-      "auto_route": true,
-      "auto_redirect": true,
-      "strict_route": true,
-      "sniff": true,
-      "endpoint_independent_nat": false,
-      "stack": "system",
-      "platform": {
-        "http_proxy": {
-          "enabled": true,
-          "server": "127.0.0.1",
-          "server_port": 2080
-        }
+"inbounds": [
+  {
+    "type": "tun",
+    "address": "172.19.0.1/30",
+    "mtu": 9000,
+    "auto_route": true,
+    "auto_redirect": true,
+    "strict_route": true,
+    "stack": "system",
+    "platform": {
+      "http_proxy": {
+        "enabled": true,
+        "server": "127.0.0.1",
+        "server_port": 2080
       }
-    },
-    {
-      "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 2080,
-      "sniff": true,
-      "users": []
     }
-  ],
+  },
+  {
+    "type": "mixed",
+    "listen": "127.0.0.1",
+    "listen_port": 2080,
+    "sniff": true,
+    "users": []
+  }
+],
+
 
   "outbounds": [
     { "tag": "🚀 节点选择", "type": "selector", "outbounds": ["节点名字1", "节点名字2"] },
     { "tag": "🤖 OpenAI", "type": "selector", "outbounds": ["节点名字1", "节点名字2"] },
     { "tag": "🎯 全球直连", "type": "direct" },
-    { "tag": "dns-out", "type": "dns" },
        {
       "tag": "节点名字1",
       "type": "hysteria2",
@@ -102,6 +100,7 @@
         "auto_detect_interface": true,
         "final": "🚀 节点选择",
     "rules": [
+      {"action": "sniff"},
       {"protocol": "dns", "action": "hijack-dns"},
       { "clash_mode": "direct", "outbound": "🎯 全球直连" },
       { "clash_mode": "global", "outbound": "GLOBAL" },
