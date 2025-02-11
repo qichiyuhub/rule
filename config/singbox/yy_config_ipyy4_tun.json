@@ -13,8 +13,8 @@
 	
     "dns": {
       "servers": [
-        {"tag": "proxyDns", "type": "https", "server": "dns.google", "domain_resolver": "defaultDns", "detour": "🚀 节点选择" },
-        {"tag": "localDns", "type": "h3", "server": "dns.alidns.com", "domain_resolver": "defaultDns", "detour": "🎯 全球直连"},
+        {"tag": "proxyDns", "type": "https", "server": "dns.google",  "detour": "🚀 节点选择" },
+        {"tag": "localDns", "type": "h3", "server": "dns.alidns.com",  "detour": "🎯 全球直连"},
         {"tag": "defaultDns", "type": "udp", "server": "119.29.29.29", "detour": "🎯 全球直连"},
         {"tag": "block", "type": "predefined", "responses": [ {"rcode": "REFUSED"}]}
       ],
