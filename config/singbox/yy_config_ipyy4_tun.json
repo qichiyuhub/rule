@@ -13,9 +13,9 @@
 	
     "dns": {
       "servers": [
-        {"tag": "proxyDns", "type": "https", "server": "dns.google", "domain_resolver": "defaultDns", "address_strategy": "ipv4_only", "client_subnet": "1.0.1.0", "detour": "🚀 节点选择" },
-        {"tag": "localDns", "type": "h3", "server": "dns.alidns.com", "domain_resolver": "defaultDns", "address_strategy": "ipv4_only", "detour": "🎯 全球直连"},
-        {"tag": "defaultDns", "type": "udp", "server": "119.29.29.29", "address_strategy": "ipv4_only", "detour": "🎯 全球直连"},
+        {"tag": "proxyDns", "type": "https", "server": "dns.google", "domain_resolver": "defaultDns", "client_subnet": "1.0.1.0", "detour": "🚀 节点选择" },
+        {"tag": "localDns", "type": "h3", "server": "dns.alidns.com", "domain_resolver": "defaultDns", "detour": "🎯 全球直连"},
+        {"tag": "defaultDns", "type": "udp", "server": "119.29.29.29", "detour": "🎯 全球直连"},
         {"tag": "block", "type": "predefined", "responses": [ {"rcode": "REFUSED"}]}
       ],
       "rules": [
