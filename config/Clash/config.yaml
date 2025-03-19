@@ -1,3 +1,4 @@
+# 注意规则在满足自己需求情况下，尽量做到精简，不要过度复杂，以免影响性能。
 # 机场订阅
 proxy-providers:
   Airport1:
@@ -14,13 +15,7 @@ proxy-providers:
       - "Clash"
       - "mihomo"
       - "Clash.meta"
-    override:
-      udp: true
-      down: "50 Mbps"
-      up: "10 Mbps"
-      skip-cert-verify: true
 
-# global-ua: clash.meta
 # 节点信息
 proxies:
   - {name: 直连, type: direct, udp: true}
@@ -46,18 +41,6 @@ disable-keep-alive: false
 profile:
   store-selected: true
   store-fake-ip: true
-
-# 数据库
-# geodata-loader: memconservative/standard
-# geodata-mode: true/false
-geo-auto-update: false
-geo-update-interval: 24
-geox-url:
-  geoip: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
-  geosite: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
-  mmdb: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
-  asn: "https://mirror.ghproxy.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
-
 
 # 控制面板
 external-controller: 0.0.0.0:9090
@@ -125,15 +108,15 @@ dns:
     - "+.cn.ntp.org.cn"
   default-nameserver:
     - 223.5.5.5
-    - 119.29.29.29
   proxy-server-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
+    - https://dns.alidns.com/dns-query
+  # namesever尽量用运营商提供的DNS
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
  
 # 出站策略
+# 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
 pr: &pr {type: select, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连]}
 proxy-groups:
   - {name: 🚀 默认代理, type: select, proxies: [🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连]}
@@ -163,6 +146,7 @@ proxy-groups:
   - {name: 🌐 全部节点, type: select, include-all: true}
 
 # 规则匹配
+# 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理
   - RULE-SET,private_domain,直连
