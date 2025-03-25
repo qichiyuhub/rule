@@ -13,7 +13,7 @@ proxy-providers:
 
 # 节点信息
 proxies:
-  - {name: 直连, type: direct, udp: true}
+  - {name: 直连, type: direct}
 
 # 全局配置 
 port: 7890
@@ -59,18 +59,6 @@ sniffer:
     - "+.v2ex.com"
   skip-domain:
     - "rule-set:private_domain,cn_domain"
-    - "dlg.io.mi.com"
-    - "+.push.apple.com"
-    - "+.apple.com"
-    - "+.wechat.com"
-    - "+.qpic.cn"
-    - "+.qq.com"
-    - "+.wechatapp.com"
-    - "+.vivox.com"
-    - "+.oray.com"
-    - "+.sunlogin.net"
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
 
 # 入站  
 tun:
@@ -96,15 +84,10 @@ dns:
     - "+.services.googleapis.cn"
     - "+.xn--ngstr-lra8j.com"
     - "time.*.com"
-    - "+.pool.ntp.org"
-    - "+.ntp.tencent.com"
-    - "+.ntp1.aliyun.com"
-    - "+.ntp.ntsc.ac.cn"
-    - "+.cn.ntp.org.cn"
   default-nameserver:
     - 223.5.5.5
   proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
+    - https://223.5.5.5/dns-query
   # namesever尽量用运营商提供的DNS
   nameserver:
     - 223.5.5.5
