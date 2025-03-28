@@ -77,7 +77,7 @@ config ruleset 'geosite_ai'
 	option enabled '1'
 	option type 'remote'
 	option format 'binary'
-	option url 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs'
+	option url 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs'
 	option update_interval '1d'
 
 config ruleset 'geosite_tiktok'
