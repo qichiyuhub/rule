@@ -58,7 +58,7 @@ sniffer:
   force-domain:
     - "+.v2ex.com"
   skip-domain:
-    - "rule-set:private_domain,cn_domain"
+    - "+.baidu.com"
 
 # 入站  
 tun:
@@ -81,8 +81,8 @@ dns:
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - "rule-set:private_domain,cn_domain"
-    - "+.services.googleapis.cn"
-    - "+.xn--ngstr-lra8j.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
     - "time.*.com"
   default-nameserver:
     - 223.5.5.5
