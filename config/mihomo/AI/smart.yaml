@@ -13,15 +13,6 @@ proxy-providers:
     #override:
       #additional-prefix: "前缀 |"
       #additional-suffix: "| 后缀"
-  Airport2:
-    url: "机场订阅2"
-    type: http
-    interval: 86400
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-    proxy: 直连
 # 节点信息
 proxies:
   - {name: 直连, type: direct}
@@ -104,7 +95,7 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
  
-# 出站策略 smart参数 （ uselightgbm: true, collectdata: false, strategy: sticky-sessions, ）
+# 出站策略 smart参数 （ uselightgbm: true, collectdata: false, strategy: sticky-sessions,policy-priority: "Premium:0.9;SG:1.3" ）
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
 pr: &pr {type: select, proxies: [🚀 默认代理, ♻️ 香港智能, ♻️ 日本智能, ♻️ 美国智能, 🔯 香港故转, 🔯 日本故转, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连]}
 proxy-groups:
