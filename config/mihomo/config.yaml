@@ -1,4 +1,6 @@
+# 必读！！！
 # 注意规则在满足自己需求情况下，尽量做到精简，不要过度复杂，以免影响性能。
+# 跑裸核用户请自行去掉下方控制面板模块的注释。
 # 机场订阅
 proxy-providers:
   Airport1:
@@ -38,11 +40,12 @@ profile:
   store-fake-ip: true
 
 # 控制面板，external-ui 路径如果出现报错，根据你使用的插件进行调整，比如openclash改为： /etc/openclash/run  ，裸核跑改为/etc/mihomo/run
-external-controller: 0.0.0.0:9090
-secret: ""
-external-ui: "/etc/nikki/run"
-external-ui-name: zashboard
-external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+# 因容易造成新手面板启动问题，我注释掉了，需要的自行开启
+#external-controller: 0.0.0.0:9090
+#secret: ""
+#external-ui: "/etc/nikki/run"
+#external-ui-name: zashboard
+#external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
 
 # 嗅探
 sniffer:
