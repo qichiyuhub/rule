@@ -53,11 +53,11 @@
       ],
       "tls":{
           "enabled":true,
-          "server_name":"www.microsoft.com",
+          "server_name":"updates.cdn-apple.com",
           "reality":{
               "enabled":true,
               "handshake":{
-                  "server":"www.microsoft.com",
+                  "server":"updates.cdn-apple.com",
                   "server_port":443
               },
               "private_key":"mAQVEs96AtDg1V_b2POFVP8n-Uu6hBe0_1Zt-DtRzGE",
@@ -72,10 +72,6 @@
       "type": "hysteria2",
       "listen": "::",
       "listen_port": 52021,
-      "obfs": {
-        "type": "salamander",
-        "password": "71c42203-ee95-44f9-97f2-3fefe254f223"
-      },
       "users": [
         {
           "password": "c36d52aa-12b0-420c-a409-02f0410f6ac4"

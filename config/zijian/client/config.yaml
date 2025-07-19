@@ -29,7 +29,7 @@ proxies:
     flow: xtls-rprx-vision
     packet-encoding: xudp
     tls: true
-    servername: "www.microsoft.com"
+    servername: "updates.cdn-apple.com"
     client-fingerprint: chrome
     reality-opts:
       public-key: "2GPEbCh3ZVgGXbwzo1TzCe38JPvMm8HRSxuOuKspKAE"
@@ -43,8 +43,6 @@ proxies:
     password: "c36d52aa-12b0-420c-a409-02f0410f6ac4"
     up: "100 Mbps"
     down: "800 Mbps"
-    obfs: salamander
-    obfs-password: "71c42203-ee95-44f9-97f2-3fefe254f223"
     client-fingerprint: chrome
     alpn:
       - h3

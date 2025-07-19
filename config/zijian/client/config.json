@@ -257,7 +257,7 @@
       "uuid": "625a08bb-d372-4f7c-a2d4-6a50ca3393ce",
       "tls": {
         "enabled": true,
-        "server_name": "www.microsoft.com",
+        "server_name": "updates.cdn-apple.com",
         "insecure": false,
         "reality": {
           "enabled": true,
@@ -277,10 +277,6 @@
       "server": "yu.ykszckj.com",
       "server_port": 52021,
       "password": "c36d52aa-12b0-420c-a409-02f0410f6ac4",
-      "obfs": {
-        "type": "salamander",
-        "password": "71c42203-ee95-44f9-97f2-3fefe254f223"
-      },
       "tls": {
         "enabled": true,
         "server_name": "yu.ykszckj.com",
