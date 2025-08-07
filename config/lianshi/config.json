@@ -1,0 +1,116 @@
+{
+  "dns": {
+    "servers": [
+      {
+        "tag": "google",
+        "type": "udp",
+        "server": "8.8.8.8"
+      },
+      {
+        "tag": "cloudflare",
+        "type": "udp",
+        "server": "1.1.1.1"
+      }
+    ],
+    "rules": [
+      {
+        "query_type": "HTTPS",
+        "action": "reject"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "server": "cloudflare"
+      }
+    ],
+    "final": "cloudflare",
+    "strategy": "ipv4_only"
+  },
+  "inbounds": [
+    {
+      "tag":"SS",
+      "type": "shadowsocks",
+      "listen": "::",
+      "listen_port": 80,
+      "method": "2022-blake3-aes-128-gcm",
+      "password": "UETm2mAIRiCaVJuIe1t0cA==",
+      "multiplex": {
+          "enabled": true
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "代理出站",
+      "type": "selector",
+      "outbounds": [
+        "直接出站"
+      ]
+    },
+    {
+      "tag": "直接出站",
+      "type": "direct"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "action": "sniff",
+        "sniffer": [
+          "http",
+          "tls",
+          "quic",
+          "dns"
+        ]
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 53
+          },
+          {
+            "protocol": "dns"
+          }
+        ],
+        "action": "hijack-dns"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "直接出站"
+      },
+      {
+        "rule_set": "geosite-ai",
+        "outbound": "代理出站"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "geosite-ai",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/qljsyph/ruleset-icon/raw/refs/heads/main/sing-box/geosite/ai-domain.srs",
+        "download_detour": "直接出站"
+      }
+    ],
+    "final": "直接出站",
+    "auto_detect_interface": true,
+    "default_domain_resolver": {
+      "server": "cloudflare"
+    }
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "/etc/sing-box/cache.db"
+    }
+  },
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "timestamp": true
+  }
+}

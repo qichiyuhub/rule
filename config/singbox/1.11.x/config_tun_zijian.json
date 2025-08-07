@@ -1,0 +1,122 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "timestamp": true
+  },
+  
+  "experimental": {
+    "clash_api": {
+      "external_controller": "0.0.0.0:9095",
+      "external_ui": "/etc/sing-box/ui",
+      "secret": "",
+      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "🚀 节点选择",
+      "default_mode": "rule"
+    },
+    "cache_file": {
+      "enabled": true
+    }
+  },
+  
+  "dns": {
+    "servers": [
+      { "tag": "proxyDns", "address": "tls://8.8.8.8", "detour": "🚀 节点选择" },
+      { "tag": "localDns", "address": "223.5.5.5", "detour": "🎯 全球直连" }
+    ],
+    "rules": [
+      { "outbound": "any", "server": "localDns", "disable_cache": true },
+      { "rule_set": "geosite-cn", "server": "localDns" },   
+      { "clash_mode": "direct", "server": "localDns" },
+      { "clash_mode": "global", "server": "proxyDns" },
+      { "rule_set": "geosite-geolocation-!cn", "server": "proxyDns" }
+    ],
+    "final": "localDns",
+    "strategy": "ipv4_only"
+  },
+
+"inbounds": [
+  {
+    "type": "tun",
+    "address": "172.19.0.1/30",
+    "mtu": 9000,
+    "auto_route": true,
+    "auto_redirect": true,
+    "strict_route": true,
+    "stack": "system",
+    "platform": {
+      "http_proxy": {
+        "enabled": true,
+        "server": "127.0.0.1",
+        "server_port": 2080
+      }
+    }
+  },
+  {
+    "type": "mixed",
+    "listen": "127.0.0.1",
+    "listen_port": 2080,
+    "sniff": true,
+    "users": []
+  }
+],
+
+
+  "outbounds": [
+    { "tag": "🚀 节点选择", "type": "selector", "outbounds": ["节点名字1", "节点名字2"] },
+    { "tag": "🤖 OpenAI", "type": "selector", "outbounds": ["节点名字1", "节点名字2"] },
+    { "tag": "🎯 全球直连", "type": "direct" },
+       {
+      "tag": "节点名字1",
+      "type": "hysteria2",
+      "server": "154.204.183.217",
+      "server_port": 60449,
+      "password": "c33a010e-b029-4bad-889d-17a5103949a8",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "insecure": true
+      }
+    },
+    {
+      "tag": "节点名字2",
+      "type": "vmess",
+      "server": "154.204.183.217",
+      "server_port": 8880,
+      "uuid": "c33a010e-b029-4bad-889d-17a5103949a8",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "headers": {
+          "Host": "www.bing.com"
+        },
+        "path": "/c33a010e-b029-4bad-889d-17a5103949a8-vm"
+      }
+    }
+  ],
+  
+  "route": {
+        "auto_detect_interface": true,
+        "final": "🚀 节点选择",
+    "rules": [
+      {"action": "sniff"},
+      {"protocol": "dns", "action": "hijack-dns"},
+      { "clash_mode": "direct", "outbound": "🎯 全球直连" },
+      { "clash_mode": "global", "outbound": "GLOBAL" },
+      { "domain": ["clash.razord.top", "yacd.metacubex.one", "yacd.haishan.me", "d.metacubex.one"], "outbound": "🎯 全球直连" },
+      { "rule_set": "geosite-private", "outbound": "🎯 全球直连" },
+      { "rule_set": "geosite-chat", "outbound": "🤖 OpenAI" },  
+      { "rule_set": "geosite-geolocation-!cn", "outbound": "🚀 节点选择" },
+      { "rule_set": ["geoip-cn", "geosite-cn"], "outbound": "🎯 全球直连" }
+    ],
+    
+    "rule_set": [
+      { "tag": "geosite-chat", "type": "remote", "format": "binary", "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs", "download_detour": "🚀 节点选择" },
+      { "tag": "geosite-geolocation-!cn", "type": "remote", "format": "binary", "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs", "download_detour": "🚀 节点选择" },
+      { "tag": "geoip-cn", "type": "remote", "format": "binary", "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs", "download_detour": "🚀 节点选择" },
+      { "tag": "geosite-cn", "type": "remote", "format": "binary", "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cn.srs", "download_detour": "🚀 节点选择" },
+      { "tag": "geosite-private", "type": "remote", "format": "binary", "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/private.srs", "download_detour": "🚀 节点选择" }
+    ]
+  }
+}
