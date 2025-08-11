@@ -138,7 +138,7 @@
         "tag": "geosite-ai",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/qljsyph/ruleset-icon/raw/refs/heads/main/sing-box/geosite/ai-domain.srs",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs",
         "download_detour": "直接出站"
       }
     ],
