@@ -53,7 +53,7 @@ profile:
   store-fake-ip: true
 
 # 为防止使用插件朋友遇到面板问题，我注释掉了此模块。
-# 跑裸核朋友自行删除注释即可
+# 跑裸核朋友自行删除注释即可，使用nikki仅内核的ui路径改为/etc/nikki/run/ui
 #external-controller: 0.0.0.0:9090
 #secret: ""
 #external-ui: "/etc/mihomo/ui"
