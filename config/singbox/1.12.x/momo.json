@@ -6,7 +6,6 @@
       {"tag": "foreign", "type": "https", "server": "1.1.1.1"}
     ],
     "rules": [
-      {"query_type": "HTTPS", "action": "reject"},
       {"clash_mode": "direct", "server": "local"},
       {"clash_mode": "global", "server": "foreign"},
       {"rule_set": ["geosite-cn", "geosite-steamcn", "geosite-apple"], "server": "local"}
