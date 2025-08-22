@@ -1,0 +1,162 @@
+{
+  "dns": {
+    "servers": [
+      {
+        "tag": "google",
+        "type": "udp",
+        "server": "8.8.8.8"
+      },
+      {
+        "tag": "cloudflare",
+        "type": "udp",
+        "server": "1.1.1.1"
+      }
+    ],
+    "rules": [
+      {
+        "query_type": "HTTPS",
+        "action": "reject"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "server": "cloudflare"
+      }
+    ],
+    "final": "cloudflare",
+    "strategy": "ipv4_only"
+  },
+  "inbounds": [
+    {
+      "tag":"SS",
+      "type": "shadowsocks",
+      "listen": "::",
+      "listen_port": 80,
+      "method": "2022-blake3-aes-128-gcm",
+      "password": "hztQCU1ZB8CAuPMVFJiCJw==",
+      "multiplex": {
+          "enabled": true
+      }
+    },
+    {
+      "tag":"VLESS-Vision-Reality",
+      "type":"vless",
+      "listen":"::",
+      "listen_port":443,
+      "users":[
+          {
+              "uuid":"625a08bb-d372-4f7c-a2d4-6a50ca3393ce",
+              "flow":"xtls-rprx-vision"
+          }
+      ],
+      "tls":{
+          "enabled":true,
+          "server_name":"updates.cdn-apple.com",
+          "reality":{
+              "enabled":true,
+              "handshake":{
+                  "server":"updates.cdn-apple.com",
+                  "server_port":443
+              },
+              "private_key":"mAQVEs96AtDg1V_b2POFVP8n-Uu6hBe0_1Zt-DtRzGE",
+              "short_id":[
+                  "a118b9425a7e2dc5"
+              ]
+          }
+      }
+    },
+    {
+      "tag": "HYSTERIA2",
+      "type": "hysteria2",
+      "listen": "::",
+      "listen_port": 52021,
+      "users": [
+        {
+          "password": "c36d52aa-12b0-420c-a409-02f0410f6ac4"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "alpn": [
+          "h3"
+        ],
+        "certificate_path": "/etc/ssl/yu.ykszckj.com/yu.ykszckj.com.crt",
+        "key_path": "/etc/ssl/yu.ykszckj.com/yu.ykszckj.com.key"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "代理出站",
+      "type": "selector",
+      "outbounds": [
+        "直接出站"
+      ]
+    },
+    {
+      "tag": "直接出站",
+      "type": "direct"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "action": "sniff",
+        "sniffer": [
+          "http",
+          "tls",
+          "quic",
+          "dns"
+        ]
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 53
+          },
+          {
+            "protocol": "dns"
+          }
+        ],
+        "action": "hijack-dns"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "直接出站"
+      },
+      {
+        "rule_set": "geosite-ai",
+        "outbound": "代理出站"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "geosite-ai",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs",
+        "download_detour": "直接出站"
+      }
+    ],
+    "final": "直接出站",
+    "auto_detect_interface": true,
+    "default_domain_resolver": {
+      "server": "cloudflare"
+    }
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "/etc/sing-box/cache.db"
+    }
+  },
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "timestamp": true
+  }
+}
