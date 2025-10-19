@@ -89,7 +89,7 @@ dns:
   fake-ip-range: 28.0.0.1/8
   fake-ip-filter-mode: blacklist
   proxy-server-nameserver:
-    - https://223.5.5.5/dns-query
+      - 119.29.29.29
   direct-nameserver:
     - 223.5.5.5
     - 119.29.29.29
