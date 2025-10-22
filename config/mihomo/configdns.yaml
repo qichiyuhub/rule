@@ -134,7 +134,6 @@ proxy-groups:
   - {name: 🌐 全部节点, type: select, include-all: true}
 
 # 规则匹配
-# 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - RULE-SET,private_ip,直连,no-resolve
   - RULE-SET,private_domain,直连
