@@ -27,7 +27,6 @@ ipv6: false
 unified-delay: true
 tcp-concurrent: true
 log-level: warning
-find-process-mode: off
 global-client-fingerprint: chrome
 keep-alive-idle: 600
 keep-alive-interval: 15
