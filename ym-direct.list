@@ -1,0 +1,11 @@
+# 直连补充列表
+
+# 域名后缀匹配
+DOMAIN-SUFFIX,baidu.com
+
+#同花顺
+IP-CIDR,159.138.41.254/32
+# 浏览器自动验证码拓展nopecha解除ip封禁
+DOMAIN,api.nopecha.com
+# DeepL直连翻译
+DOMAIN,www2.deepl.com
