@@ -28,7 +28,6 @@ DOMAIN-SUFFIX,openwrt.org
 DOMAIN-SUFFIX,check.proxyip.cmliussss.net
 DOMAIN-SUFFIX,3.8.c.b.0.d.0.0.1.0.a.2.ip6.arpa
 DOMAIN-SUFFIX,d.a.7.0.4.2.0.0.0.7.4.0.1.0.0.2.ip6.arpa
-DOMAIN-SUFFIX,hubuhost.com
 #谷歌大陆节点代理
 DOMAIN-SUFFIX,gstatic.com
 #谷歌play
