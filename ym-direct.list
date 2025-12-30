@@ -2,7 +2,7 @@
 
 # 域名后缀匹配
 DOMAIN-SUFFIX,baidu.com
-
+DOMAIN-SUFFIX,pool.ntp.org
 #同花顺
 IP-CIDR,159.138.41.254/32
 # 浏览器自动验证码拓展nopecha解除ip封禁
