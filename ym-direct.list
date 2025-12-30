@@ -2,6 +2,7 @@
 
 # 域名后缀匹配
 DOMAIN-SUFFIX,baidu.com
+DOMAIN-SUFFIX,ntp.se
 DOMAIN-SUFFIX,pool.ntp.org
 #同花顺
 IP-CIDR,159.138.41.254/32
