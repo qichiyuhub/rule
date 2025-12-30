@@ -26,7 +26,6 @@ DOMAIN-SUFFIX,ping0.ipyard.com
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,openwrt.org
 DOMAIN-SUFFIX,henghost.com
-DOMAIN-SUFFIX,app.adjust.com
 DOMAIN-SUFFIX,api.iturrit.com
 DOMAIN-SUFFIX,mixplorer.com
 DOMAIN-SUFFIX,mousegesturesapi.com
@@ -48,6 +47,7 @@ IP-CIDR,113.29.226.135/32,no-resolve
 
 # 域名关键字匹配
 DOMAIN-KEYWORD,1e100
+DOMAIN-KEYWORD,adjust
 
 # 国外DNS
 DOMAIN-SUFFIX,dns.google
