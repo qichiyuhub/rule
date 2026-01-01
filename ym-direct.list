@@ -1,12 +1,52 @@
-# 直连补充列表
-
 # 域名后缀匹配
 DOMAIN-SUFFIX,baidu.com
 DOMAIN-SUFFIX,ntp.se
 DOMAIN-SUFFIX,pool.ntp.org
+
 #同花顺
 IP-CIDR,159.138.41.254/32
+
 # 浏览器自动验证码拓展nopecha解除ip封禁
 DOMAIN,api.nopecha.com
+
 # DeepL直连翻译
 DOMAIN,www2.deepl.com
+
+# CN域名
+DOMAIN-SUFFIX,api.ipify.org # ip查询
+DOMAIN-SUFFIX,bam.nr-data.net # NewRelic数据上报，很多程序都包含了此功能用于开发者追踪错误，频繁上报者会使用很多流量故强制直连
+DOMAIN-SUFFIX,sentry.io # sentry错误上报程序，很多程序都包含了此功能用于开发者追踪错误，频繁上报者会使用很多流量故强制直连
+DOMAIN-SUFFIX,qing-yu.top # CDN
+
+# 下载
+DOMAIN-SUFFIX,router.bittorrent.com # tracker
+
+# 微软部分直连域名，不使用GEO是因为部分微软域名需要代理
+DOMAIN-SUFFIX,wns.windows.com # Windows推送服务，包括更新等消息通知
+DOMAIN-SUFFIX,msftconnecttest.com # 微软连接测试，已位于connectivity-check
+DOMAIN-SUFFIX,msftncsi.com # 微软网络连接状态指示器，已位于connectivity-check
+DOMAIN-SUFFIX,ipv6.microsoft.com # 微软IPv6相关域名
+DOMAIN-SUFFIX,xboxlive.com # Xbox相关域名
+DOMAIN-SUFFIX,rewards.bing.com # 微软bing积分兑换，绑定地区，开代理兑换容易黑号
+DOMAIN-SUFFIX,api.onedrive.com # 微软OneDrive个人版的桌面应用，现已被划分到GFW会跑流量，实际上可以直连
+
+# Stun
+DOMAIN-SUFFIX,stun.isp.net.au
+DOMAIN-SUFFIX,fwa.lifesizecloud.com
+DOMAIN-SUFFIX,stun.freeswitch.org
+DOMAIN-SUFFIX,stun.voip.blackberry.com
+DOMAIN-SUFFIX,stun.nextcloud.com
+DOMAIN-SUFFIX,stun.radiojar.com
+DOMAIN-SUFFIX,stun.sonetel.com
+DOMAIN-SUFFIX,stun.syncthing.net
+DOMAIN-SUFFIX,stun.hot-chilli.net
+DOMAIN-SUFFIX,stun.fitauto.ru
+
+# github代理加速
+DOMAIN-SUFFIX,ghproxy.net
+DOMAIN-SUFFIX,gh-proxy.com
+DOMAIN-SUFFIX,ghfast.top
+
+# 科研网站，不允许代理访问
+DOMAIN-SUFFIX,ncbi.nlm.nih.gov
+DOMAIN-SUFFIX,crossref.org
