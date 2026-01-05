@@ -29,7 +29,7 @@ proxies:
     flow: xtls-rprx-vision
     packet-encoding: xudp
     tls: true
-    servername: "updates.cdn-apple.com"
+    servername: "appldnld.apple.com"
     client-fingerprint: chrome
     reality-opts:
       public-key: "2GPEbCh3ZVgGXbwzo1TzCe38JPvMm8HRSxuOuKspKAE"
