@@ -75,3 +75,6 @@ IP-CIDR,1.0.0.1/32,no-resolve
 IP-CIDR,185.222.222.222/32,no-resolve
 IP-CIDR,208.67.222.222/32,no-resolve
 IP-CIDR,208.67.220.220/32,no-resolve
+IP-CIDR,2a01:4f9:6b:47e9::2145/32,no-resolve #mikr
+IP-CIDR,2a02:180:6:1::83d/32,no-resolve #euser
+IP-CIDR,2a14:67c0:306:2c4::a/32,no-resolve #alice
