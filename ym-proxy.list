@@ -1,0 +1,80 @@
+# 代理补充列表
+# 域名后缀匹配
+DOMAIN-SUFFIX,clubsim.com.hk
+DOMAIN-SUFFIX,qichiyu.com
+DOMAIN-SUFFIX,de5.net
+DOMAIN-SUFFIX,mikr.us
+DOMAIN-SUFFIX,dnshe.com
+DOMAIN-SUFFIX,workers.dev
+DOMAIN-SUFFIX,qichiyu.com
+DOMAIN-SUFFIX,tv.garden
+DOMAIN-SUFFIX,hax.co.id 
+DOMAIN-SUFFIX,alice.ws
+DOMAIN-SUFFIX,yiming.xyz
+DOMAIN-SUFFIX,canyang.com
+DOMAIN-SUFFIX,zanyang.com
+DOMAIN-SUFFIX,github.com
+DOMAIN-SUFFIX,workers.dev
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,alice.sh
+DOMAIN-SUFFIX,virtnet.bond
+DOMAIN-SUFFIX,login.uts.edu.au
+DOMAIN-SUFFIX,iiiiii.ggff.net
+DOMAIN-SUFFIX,sub.kkgg.us.kg
+DOMAIN-SUFFIX,tunnelbroker.net
+DOMAIN-SUFFIX,customer.l53.net
+DOMAIN-SUFFIX,ping0.ipyard.com
+DOMAIN-SUFFIX,immortalwrt.org
+DOMAIN-SUFFIX,openwrt.org
+DOMAIN-SUFFIX,henghost.com
+DOMAIN-SUFFIX,api.iturrit.com
+DOMAIN-SUFFIX,mixplorer.com
+DOMAIN-SUFFIX,mousegesturesapi.com
+DOMAIN-SUFFIX,google-analytics.com
+DOMAIN-SUFFIX,crxmouse.com
+DOMAIN-SUFFIX,www.twilio.com
+DOMAIN-SUFFIX,api.segment.io
+DOMAIN-SUFFIX,fty.xxooo.cf
+DOMAIN-SUFFIX,update.googleapis.com
+DOMAIN-SUFFIX,vercel-ip.html.zone
+DOMAIN-SUFFIX,accounts.google.com
+DOMAIN-SUFFIX,weatheroffer.com
+DOMAIN-SUFFIX,check.proxyip.cmliussss.net
+DOMAIN-SUFFIX,x-aniu.com
+DOMAIN-SUFFIX,3.8.c.b.0.d.0.0.1.0.a.2.ip6.arpa
+DOMAIN-SUFFIX,d.a.7.0.4.2.0.0.0.7.4.0.1.0.0.2.ip6.arpa
+#谷歌大陆节点代理
+DOMAIN-SUFFIX,gstatic.com
+#谷歌play
+DOMAIN-SUFFIX,googleapis.cn
+# NodeSeek
+DOMAIN-SUFFIX,nodeseek.com
+IP-CIDR,198.18.23.57/32,no-resolve
+IP-CIDR,113.29.226.135/32,no-resolve
+
+# 域名关键字匹配
+DOMAIN-KEYWORD,1e100
+DOMAIN-KEYWORD,adjust
+
+# 国外DNS
+DOMAIN-SUFFIX,dns.google
+DOMAIN-SUFFIX,1dot1dot1dot1.cloudflare-dns.com
+DOMAIN-SUFFIX,dot.sb
+DOMAIN-SUFFIX,dns.umbrella.com
+DOMAIN-SUFFIX,dns.quad9.net
+DOMAIN-SUFFIX,dns.google
+DOMAIN-SUFFIX,cloudflare-dns.com
+DOMAIN-SUFFIX,doh.dns.sb
+DOMAIN-SUFFIX,doh.opendns.com
+DOMAIN-SUFFIX,dns.quad9.net
+DOMAIN-SUFFIX,hk-hkg.doh.sb
+IP-CIDR,8.8.8.8/32,no-resolve
+IP-CIDR,8.8.4.4/32,no-resolve
+IP-CIDR,1.1.1.1/32,no-resolve
+IP-CIDR,1.0.0.1/32,no-resolve
+IP-CIDR,185.222.222.222/32,no-resolve
+IP-CIDR,208.67.222.222/32,no-resolve
+IP-CIDR,208.67.220.220/32,no-resolve
+IP-CIDR,2a01:4f9:6b:47e9::2145/32,no-resolve #mikr
+IP-CIDR,2a02:180:6:1::83d/32,no-resolve #euser
+IP-CIDR,2a14:67c0:306:2c4::a/32,no-resolve #alice

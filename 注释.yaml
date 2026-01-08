@@ -1,0 +1,444 @@
+## 入站端口配置 ---------------------------------------------------------------------------------------------------
+mixed-port: 7890 # HTTP+Socks4混合，Win下的系统代理端口
+socks-port: 1080 # Socks5，代理端口
+port: 8080 # HTTP，代理端口
+redir-port: 7891 # 非linux无效，redir 透明代理端口
+tproxy-port: 7892 # 非linux无效，tproxy 透明代理端口
+
+## 全局配置 ------------------------------------------------------------------------------------------------
+mode: rule # rule（规则）/ global（全局）/ direct（直连）
+allow-lan: true # 允许局域网连接
+bind-address: "*" # 监听的本地网卡IP地址，*为全部IP地址
+log-level: warning # 内核日志级别
+ipv6: true # 是否接受ipv6流量
+tcp-concurrent: true # TCP并发
+#interface-name: en0  # clash流量出站接口，即接口绑定
+find-process-mode: strict # 进程匹配模式（off:关闭，alwas:开启，strict自动），tun模式下无效
+lan-allowed-ips: # 允许连接的客户端IP，默认允许全部
+  - 0.0.0.0/0
+  - ::/0
+lan-disallowed-ips: # 禁止连接的IP，优先级高于allow白名单
+  - ~
+authentication: # http(s)/socks/mixed 的用户验证，格式："user1:pass1"，不写则禁止全部用户
+  - ~
+skip-auth-prefixes: # 白名单，允许跳过用户验证的IP
+  - ~
+unified-delay: false # 统一延迟计算，没啥卵用，就是界面好看，会对延迟自动选择策略造成影响
+#routing-mark: 6666  # 非linux无效，路由标记，为流量提供标记以供其他应用进行流量处理
+
+## TCP-KeepA-live配置 ------------------------------------------------------------------------------------------
+keep-alive-idle: 30 # 触发心跳包的链路无活动阈值，无活动后发送心跳包检测对端是否存活
+keep-alive-interval: 15 # 发送心跳包的间隔，无回应则最多重发9次后判断链路关闭
+disable-keep-alive: false # 禁用 keep alive，即允许长链接一直存在，安卓端会强制设定为true
+
+## API面板设置---------------------------------------------------------------------------------------------------
+external-controller: "[::]:9090" # API面板监听地址
+secret: "hd54RIm0LiUpyu" #🔴API面板访问密钥
+external-ui: ui # API面板静态资源路径
+external-ui-name: zashboard # API面板名，配合路径拼接成路径，例如/ui/metacubexd
+external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip" # API面板下载地址
+
+## 缓存设置
+profile:
+  store-selected: true # 缓存 API面板 对策略组的选择
+  store-fake-ip: true # 缓存 fakeip 映射表
+
+## 外部资源下载设置---------------------------------------------------------------------------------------------------
+global-client-fingerprint: random # 全局客户端指纹，优先级低于其他处的声明
+global-ua: clash.meta # 全局UA，默认为clash.meta
+etag-support: true # 资源下载的 ETag 支持，使重复资源不会重复下载
+geodata-mode: true # GEOIP数据模式，false:mmdb，true:dat，mmdb更新但有设备不支持
+geodata-loader: standard # GEO文件加载模式，默认memconservative（小内存设备模式，即分段加载geo数据而不是全部加载）
+geo-auto-update: true # GEO文件自动更新
+geo-update-interval: 168 # 更新间隔，小时
+geox-url: # GEO数据库下载地址，内核会按需下载，未被使用的数据库不会被下载，采用star最多的v2ray项目，修bug很快
+  geoip: "https://ghfast.top/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat"
+  geosite: "https://ghfast.top/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
+  #mmdb: "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb"
+  #asn: "https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
+
+## fakeip下的DNS设置---------------------------------------------------------------------------------------------------
+# 客户端发起网址A的DNS，到达mihomo的DNS模块，mihomo会使用下方的配置进行DNS
+# 当fakeip为黑名单模式时，未匹配到filter的域名将直接返回fakeip给客户端
+# 匹配到fakeip的域名将会使用redir-host模式进行常规解析，得到IP后返回给客户端
+# 客户端拿到IP后，再次对IP发起连接请求，此时请求会进入mihomo的规则匹配，根据匹配结果直连或者远端解析
+# 也就是说DNS解析实际上会发生两次，第一次的结果并不重要，第二次只要规则正确触发远程解析，绝不会污染和劫持
+# 但如果第一次拿到了0.0.0.0,127.0.0.1这样的无效IP，请求无法发给mihomo就会无法访问
+# 综上所述，配置DNS没有那么重要，只要保证首次解析不要得到0.0.0.0这样的错误IP即可
+# 但是如果一定要要求访问国外域名DNS无泄漏，或者需要对国外进行分流，那么建议使用fakeip模式
+# 因为fakeip模式下，国外域名全部是fakeip并未进行本地解析，而且国外域名内网全部使用fakeip段，方便分流
+
+public-dns: &public-dns # 快速的DNS，不关心是否存在污染和劫持，只要快就好了
+  - dhcp://wan # 指定网卡DHCP获取的DNS，硬路由的wan口网卡名一般为wan
+  - dhcp://eth1 # 软路由的wan口一般为最后一张网卡，eth0,eth1 双网口就是eth1
+  - 223.5.5.5 # 阿里主DNS
+
+secure-dns: &secure-dns # 加密的DNS，必须避免被解析为0.0.0.0等污染
+  - https://223.5.5.5/dns-query # 阿里主DNS，支持H3，不强制开启防止部分地区不支持h3
+  - https://223.6.6.6/dns-query # 阿里备DNS，支持H3，不强制开启防止部分地区不支持h3
+  - https://1.12.12.12/dns-query # DNSPod公共DNS，不支持H3
+  - https://120.53.53.53/dns-query # DNSPod公共DNS，不支持H3
+
+dns:
+  enable: true # 启用dns模块，否则采用系统DNS
+  listen: "[::]:1053" # DNS监听端口，仅支持udp
+  enhanced-mode: fake-ip # DNS处理模式：redir-host/fake-ip，fake-ip更快但可能引入问题（缓存fakeip后无法故障切换）
+  cache-algorithm: arc # DNS缓存算法，lru（默认）性能开销低，被访问到就提前，超出容量则踢出队尾，适合固定访问有限网站；arc策略则是职能匹配，偶然查询的陌生网站不会踢掉经常访问的网站，但是性能开销更大，适合性能宽裕设备
+  prefer-h3: true # DoH若支持则优先使用HTTP/3
+  ipv6: true # 是否解析ipv6地址，否则返回空结果
+  use-hosts: true # 查询配置文件中的 hosts
+  use-system-hosts: true # 查询系统的 hosts
+  respect-rules: false # DNS请求遵循路由规则，需先配置好 proxy-server-nameserver，否则出现鸡蛋问题，强烈不建议和perfer-h3一起使用
+
+  # fakeip配置段
+  fake-ip-range: 198.18.0.1/16 # fakeip 的 IP 段，tun接口的默认 IPV4 地址 也使用此值作为参考
+  fake-ip-filter-mode: blacklist # 黑/白名单模式，黑名单下，filter内容将使用redir-host模式解析
+  fake-ip-filter: # fakeip过滤，以下域名将跳过Fakeip使用下方的redir模块解析真实IP，双WAN分流则可直接直连，填入不怕DNS污染的域名和必须直连的域名
+    - "rule-set:🌐Direct-FISH" # 个人收集的直连域名，包含GeoSite未分类的零散域名
+    - "geosite:private" # 私有地址，包括stun，lan，路由器后台网址等域名
+    - "geosite:category-ntp" # NTP域名
+    - "geosite:tailscale" # Tailscale域名，包括P2P打洞过程
+    - "geosite:apple" # 苹果域名，配合双WAN分流可以避免长链接耗电问题
+    - "geosite:category-cas" # 各类证书颁发机构域名
+    - "geosite:category-public-tracker" # 公共tracker域名
+    - "rule-set,🔐PT-Tracker,DIRECT" # PT tracker，必须直连，否则会代理上传下载
+    - "geosite:win-update" # Windows操作系统升级域名
+    - "geosite:category-game-platforms-download" # 各类游戏平台下载域名，包括steam下载
+    - "geosite:geolocation-cn" # 地理位置在中国的域名，不包括谷歌在中国的域名避免谷歌商店下载问题，关于谷歌商店下载，详见♻️延迟最低文件内容
+    - "geosite:geolocation-!cn@cn" # 地理位置不在中国的域名中具有国内CDN的部分，包括Steam在的国内CDN
+    - "geosite:category-ads-all" # 广告域名，交给redirect-host模块返回空结果
+
+  # redir-host配置段
+  default-nameserver: *secure-dns # 解析DNS服务器域名的DNS，可以加密但必须为IP，如果不用DNS服务器的域名则无需配置
+  proxy-server-nameserver: *secure-dns # 解析代理节点域名的DNS，不填则遵循namepolicy
+  direct-nameserver: *public-dns # 解析direct出口域名的DNS，不填则遵循namepolicy，nameserver和fallback
+  direct-nameserver-follow-policy: false # direct出口域名是否遵循nameserver-policy，默认false则使用direct-nameserver，仅当direct-nameserver不为空时生效
+  nameserver-policy: # 优先级高于nameserver，匹配完成之后再去匹配nameserver和fallback
+    "geosite:category-ads-all": rcode://success # 匹配广告域名，返回空结果
+  nameserver: *public-dns # 兜底默认DNS组，未命中 nameserver-policy 时启用
+  # fallback: # 过时的配置，已被 nameserver-policy 取代，使用时会产生DNS泄露
+
+## hosts设置---------------------------------------------------------------------------------------------------
+hosts: # 自定义hosts映射，可以在此处手动指定一些Fakeip地址以强制分流
+  "mihomo.mihomo": 127.0.0.1
+
+## 嗅探设置---------------------------------------------------------------------------------------------------
+sniffer: # 嗅探，获取SNI中的域名，使mihomo能够反解未经自己DNS的IP请求的域名，来匹配域名规则
+  enable: false # 启用sniffer，除非使用非mihomo的DNS，否则无需启用
+  force-dns-mapping: true # 对redir-host类型识别的流量进行强制嗅探
+  parse-pure-ip: true # 对所有未获取到域名的流量进行强制嗅探
+  override-destination: true # 是否使用嗅探结果作为实际访问，默认为 true
+  sniff: # 需要嗅探的协议类型，仅支持 HTTP/TLS/QUIC
+    TLS: # TLS协议
+      ports: # 端口白名单，只针对下列端口嗅探
+        - 443
+        - 8443
+    HTTP: # HTTP协议
+      ports: # 端口白名单，只针对下列端口嗅探
+        - 80
+        - 8080-8880
+    QUIC: # QUIC协议
+      ports: # 端口白名单，只针对下列端口嗅探
+        - 443
+        - 8443
+  force-domain: # 强制嗅探的域名
+    - "+.netflix.com"
+    - "+.nflxvideo.net"
+    - "+.amazonaws.com"
+    - "+.media.dssott.com"
+  skip-domain: # 需要跳过嗅探的域名，主要解决部分站点sni字段非域名，导致嗅探结果异常的问题，如米家设备，也可针对使用内核进行DNS的域名节省开销（这些由内核解析的域名因为保存有对照表，无需嗅探）
+    - "+.apple.com"
+    - Mijia Cloud
+    - dlg.io.mi.com
+    - "+.oray.com"
+    - "+.sunlogin.net"
+    - "geosite:geolocation-cn"
+    - "geosite:geolocation-!cn@cn"
+  #skip-src-address: # 需要跳过嗅探的源地址
+  #skip-dst-address: # 需要跳过嗅探的目的地址
+
+## tun设置---------------------------------------------------------------------------------------------------
+tun:
+  enable: false # 启用Tun接口，tun性能低开销大，除非必须否则不建议使用
+  stack: mixed # TUN 堆栈模式,建议 mixed（TCP：system，UDP：Gvisor），对于Windows开启防火墙后需要手动放行内核，否则只能使用Gvisor
+  device: utun0 # TUN 网卡名，MacOS 只能 utun 开头
+  auto-route: false # 核心自动设置全局路由防火墙规则，会与插件的防火墙规则冲突，导致无法正常上网/代理
+  auto-detect-interface: false # 核心自动选择流量的出接口（默认wan口），会与插件冲突
+  dns-hijack: # dns 劫持，将匹配到的连接导入内部 dns 模块，不书写协议则默认 udp://
+    - any:53
+    - tcp://any:53
+  mtu: 9000 # MTU
+  gso: true # 通用分段卸载，仅支持Linux，提高性能
+  gso-max-size: 65536 # 通用分段卸载包的最大长度
+  exclude-package: # 安卓排除的包名
+    - com.tencent.mobileqq # QQ
+    - com.tencent.mm # 微信
+    - com.tencent.androidqqmail # QQ邮箱
+    - com.xingin.xhs # 小红书
+    - idm.internet.download.manager # 1DM下载器
+    - com.sausage.download # 浩克下载
+    - com.eg.android.AlipayGphone # 支付宝
+    - com.sgcc.wsgw.cn # 网上国网
+    - com.taobao.taobao # 淘宝
+    - com.jingdong.app.mall # 京东
+    - com.MobileTicket # 铁路12306
+    - com.chinamworld.main # 中国建设银行
+    - com.jd.jrapp # 京东金融
+  #auto-redirect: true # 仅Linux有效，自动配置 iptables/nftables 以重定向 TCP 连接，需要auto-route: true，与插件设置冲突
+  #strict-route: false # 将所有连接路由到 tun 来防止泄漏，但你的设备将无法其他设备被访问，严重拖慢Windows访问速度，可能造成虚拟机运行异常
+  #endpoint-independent-nat: false # 独立于端点的 NAT，性能可能下降，不建议不需要时开启
+
+## 代理提供者设置---------------------------------------------------------------------------------------------------
+proxy-providers-general: &proxy-providers-general # 代理提供者通用配置
+  type: http # 类型，可选http/file/inline
+  interval: 259200 # 更新间隔，单位秒
+  proxy: 🌐默认直连 # http类型更新时使用的代理组，不建议设置代理，如果你的机场需要代理才能订阅，那先有鸡还是先有蛋？
+  size-limit: 0 # 文件大小限制，0为不限制
+  exclude-filter: "(?i)官网|每月刷新订阅|机场|到期|https://|剩余流量"
+  override:
+    #tfo: false # 启用TCP Fast Open，一般都不支持
+    #mptcp: false # 启用TCP Multi Path，一般都不支持
+    #udp: true # 启用UDP
+    #udp-over-tcp: false # 启用UDP over TCP
+    #skip-cert-verify: false # 跳过证书验证
+    #down: "50 Mbps" # 下行限速
+    #up: "10 Mbps" # 上行限速
+    #ip-version: dual # 可选dual/ipv4/ipv6/ipv4-prefer/ipv6-prefer，即优先v4或v6，仅v4或v6
+
+proxy-providers:
+  #❗provider占位1
+  #❗provider占位2
+  #❗provider占位3
+  #❗provider占位4
+
+## 代理组设置---------------------------------------------------------------------------------------------------
+use-all-proxy-providers: &use-all-proxy-providers # 代理组通用配置
+  use:
+    #❗use-provider占位1
+    #❗use-provider占位2
+    #❗use-provider占位3
+    #❗use-provider占位4
+
+health-check-general: &health-check-general # 代理组健康检查通用配置
+  <<: *use-all-proxy-providers
+  url: http://www.gstatic.com/generate_204
+  interval: 30 # 健康检查间隔
+  tolerance: 300 # 延迟容忍度，单位ms
+  lazy: true # 未选中当前组时不进行测试
+  timeout: 5000 # 健康检查超时，单位ms
+  max-failed-times: 5 # 失败次数，超过则执行一次强制健康检查
+
+default-proxy: &default-proxy # 默认代理组
+  proxies:
+    - ✅默认代理
+    - ♻️延迟最低（低倍节点）
+    - ♻️延迟最低
+    - ⚠️故障切换
+    - 🖐️手动切换
+    - 🇭🇰香港节点
+    - 🇨🇳台湾节点
+    - 🇸🇬狮城节点
+    - 🇯🇵日本节点
+    - 🇺🇲美国节点
+    - DIRECT
+
+default-direct: &default-direct # 默认直连组
+  proxies:
+    - DIRECT
+    - ✅默认代理
+    - ♻️延迟最低（低倍节点）
+    - ♻️延迟最低
+    - ⚠️故障切换
+    - 🖐️手动切换
+    - 🇭🇰香港节点
+    - 🇨🇳台湾节点
+    - 🇸🇬狮城节点
+    - 🇯🇵日本节点
+    - 🇺🇲美国节点
+
+proxy-groups:
+  ##################################
+  - name: ♻️延迟最低（低倍节点）
+    type: url-test
+    filter: '\[0\.\d+\]'
+    <<: *health-check-general
+
+  - name: ♻️延迟最低
+    type: url-test
+    <<: *health-check-general
+
+  - name: ⚠️故障切换
+    type: fallback
+    <<: *health-check-general
+
+  - name: 🖐️手动切换
+    type: select
+    <<: *use-all-proxy-providers
+
+  ##################################
+  - name: ✅默认代理
+    type: select
+    proxies:
+      - ♻️延迟最低（低倍节点）
+      - ♻️延迟最低
+      - ⚠️故障切换
+      - 🖐️手动切换
+      - 🇭🇰香港节点
+      - 🇨🇳台湾节点
+      - 🇸🇬狮城节点
+      - 🇯🇵日本节点
+      - 🇺🇲美国节点
+      - DIRECT
+
+  - name: 🌐默认直连
+    type: select
+    <<: *default-direct
+
+  - name: 🐟漏网之鱼
+    type: select
+    <<: *default-direct
+
+  ##################################
+  - name: Ⓜ️微软Copilot
+    type: select
+    <<: *default-proxy
+    icon: https://ghfast.top/https://github.com/refined-fish/clash_rule_fish/blob/main/Icons/Microsoft_365_Copilot.png
+
+  - name: ⏣OpenAi
+    type: select
+    <<: *default-proxy
+    icon: https://ghfast.top/https://github.com/refined-fish/clash_rule_fish/blob/main/Icons/Chat_GPT.png
+
+  - name: ✈️Telegram
+    type: select
+    <<: *default-proxy
+    icon: https://ghfast.top/https://github.com/refined-fish/clash_rule_fish/blob/main/Icons/Telegram.png
+
+  - name: 🧱GFW
+    type: select
+    <<: *default-proxy
+    icon: https://ghfast.top/https://github.com/refined-fish/clash_rule_fish/blob/main/Icons/GFW.png
+
+  - name: 📺巴哈姆特
+    type: select
+    proxies:
+      - 🇭🇰香港节点
+      - 🇨🇳台湾节点
+    icon: https://ghfast.top/https://github.com/refined-fish/clash_rule_fish/blob/main/Icons/巴哈姆特.png
+
+  - name: 🎮Steam
+    type: select
+    <<: *default-direct
+    icon: https://ghfast.top/https://github.com/refined-fish/clash_rule_fish/blob/main/Icons/Steam.png
+
+  - name: Ⓜ️微软服务
+    type: select
+    <<: *default-direct
+    icon: https://ghfast.top/https://github.com/refined-fish/clash_rule_fish/blob/main/Icons/Microsoft.png
+
+  - name: 🔐PT网站
+    type: select
+    <<: *default-proxy
+    icon: https://ghfast.top/https://github.com/refined-fish/clash_rule_fish/blob/main/Icons/PT.png
+
+  ##################################
+  - name: 🇭🇰香港节点
+    type: url-test
+    <<: *health-check-general
+    filter: "港|HK|hk|Hong Kong|HongKong|hongkong"
+
+  - name: 🇯🇵日本节点
+    type: url-test
+    <<: *health-check-general
+    filter: "日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan"
+
+  - name: 🇺🇲美国节点
+    type: url-test
+    <<: *health-check-general
+    filter: "美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States"
+
+  - name: 🇨🇳台湾节点
+    type: url-test
+    <<: *health-check-general
+    filter: "台|新北|彰化|TW|Taiwan"
+
+  - name: 🇸🇬狮城节点
+    type: url-test
+    <<: *health-check-general
+    filter: "新加坡|坡|狮城|SG|Singapore"
+
+## 规则提供者设置---------------------------------------------------------------------------------------------------
+rule-providers-general: &rule-providers-general
+  type: http
+  behavior: classical
+  interval: 86400
+
+rule-providers:
+  ♻️延迟最低-FISH:
+    <<: *rule-providers-general
+    url: https://raw.githubusercontent.com/refined-fish/clash_rule_fish/refs/heads/main/Ruleset/♻️延迟最低-FISH.yaml
+    path: ./providers/rule/rule-provider_♻️延迟最低-FISH.yaml
+
+  🌐Direct-FISH:
+    <<: *rule-providers-general
+    url: https://raw.githubusercontent.com/refined-fish/clash_rule_fish/refs/heads/main/Ruleset/🌐Direct-FISH.yaml
+    path: ./providers/rule/rule-provider_🌐Direct-FISH.yaml
+
+  Ⓜ️微软Copilot-FISH:
+    <<: *rule-providers-general
+    url: https://raw.githubusercontent.com/refined-fish/clash_rule_fish/refs/heads/main/Ruleset/Ⓜ️微软Copilot-FISH.yaml
+    path: ./providers/rule/rule-provider_Ⓜ️微软Copilot-FISH.yaml
+
+  🔐PT-Tracker:
+    <<: *rule-providers-general
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PrivateTracker/PrivateTracker.yaml
+    path: ./providers/rule/rule-provider_🔐PT-Tracker.yaml
+
+## 路由规则设置---------------------------------------------------------------------------------------------------
+rules:
+  #### 对于必须直连者直接使用direct写死，其他尽可能使用代理组以方便面板控制以及切换测试
+  # FISH自定义规则块
+  - RULE-SET,♻️延迟最低-FISH,✅默认代理 # FISH自定义代理
+  - RULE-SET,🌐Direct-FISH,🌐默认直连 # FISH自定义直连
+
+  # 禁用所有代理的QUIC，防止速度不佳和IP泄露，不包括国内网站
+  - AND,(AND,(DST-PORT,443),(NETWORK,UDP)),(NOT,((GEOSITE,geolocation-cn))),REJECT # 禁用域名的QUIC，防止速度不佳和IP泄露
+  - AND,(AND,(DST-PORT,443),(NETWORK,UDP)),(NOT,((GEOIP,cn))),REJECT # 禁用IP的QUIC，防止速度不佳和IP泄露
+
+  # 私有地址绕过块
+  - GEOIP,private,DIRECT,no-resolve # 私有地址直连
+  - GEOSITE,private,DIRECT # 私有地址直连
+
+  #### 代理规则块，按照使用频率/规则集大小排序
+  # 其他
+  - GEOSITE,tailscale,DIRECT # 必须直连，否则tailscale无法成功直连打洞
+  - GEOSITE,category-public-tracker,DIRECT # 必须直连，否则BT会向Tracker上报代理IP，代理下载上传
+  - GEOSITE,category-cas,DIRECT # 证书颁发机构，直连以防止证书错误
+  - GEOSITE,win-update,DIRECT # Windows操作系统升级，直连以节省流量
+  - RULE-SET,🔐PT-Tracker,DIRECT # PT tracker，必须直连，否则会代理上传下载
+  # 游戏相关
+  - GEOSITE,category-game-platforms-download,🌐默认直连 # 各类游戏平台下载域名，包括steam下载
+  # 影视相关
+  - GEOSITE,category-pt,🔐PT网站 # PT网页多用cloudFlare，污染严重故代理，需注意有的PT站网页域名也是tracker！
+  - GEOSITE,tmdb,✅默认代理 # TMDB服务，影视刮削，直连访问缓慢经常失败
+  - GEOSITE,bahamut,📺巴哈姆特 # 巴哈姆特服务
+  - GEOSITE,category-porn,✅默认代理 # X网站
+  # 微软相关
+  - RULE-SET,Ⓜ️微软Copilot-FISH,Ⓜ️微软Copilot # 微软copilot服务
+  # openAI相关
+  - GEOSITE,openai,⏣OpenAi # OpenAi服务
+  # 编程相关
+  - GEOSITE,category-container,✅默认代理 # 各种容器服务
+  - GEOSITE,python,✅默认代理 # Python服务，例如pip直连下载较慢
+  # telegram相关
+  - GEOSITE,telegram,✈️Telegram # Telegram服务
+  - GEOIP,telegram,✈️Telegram,no-resolve # Telegram服务IP
+
+  #### 兜底规则块，一般精细的分流规则应在其上
+  - GEOSITE,gfw,🧱GFW # GFW兜底
+  - GEOSITE,microsoft,Ⓜ️微软服务 # 微软服务，放于GFW后是因为github等在GFW中需要代理
+  - GEOSITE,steam,🎮Steam # Steam，默认直连，换区时修改此处，放于GFW之后是因创意工坊需始终代理
+  - GEOSITE,geolocation-cn,🌐默认直连 # 地理位置在中国的域名，不包括谷歌在中国的域名避免谷歌商店下载问题
+  - GEOSITE,geolocation-!cn@cn,🌐默认直连 # 地理位置不在中国的域名中具有国内CDN的部分，包括Steam在的国内CDN
+  - GEOIP,cn,🌐默认直连,no-resolve # 中国IP
+  - MATCH,🐟漏网之鱼 # 漏网之鱼
