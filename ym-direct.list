@@ -4,8 +4,7 @@ DOMAIN-SUFFIX,lanzov.com
 DOMAIN-SUFFIX,hao123.com
 DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,time.windows.com
-IP-CIDR,2a01:4f9:6b:47e9::2145,no-resolve
-
+IP-CIDR,2a01:4f9:6b:47e9::2145/32,no-resolve #mikr
 # 域名关键字匹配
 DOMAIN-KEYWORD,baidu
 
