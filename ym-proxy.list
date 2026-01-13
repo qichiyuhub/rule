@@ -39,10 +39,17 @@ DOMAIN-SUFFIX,update.googleapis.com
 DOMAIN-SUFFIX,vercel-ip.html.zone
 DOMAIN-SUFFIX,accounts.google.com
 DOMAIN-SUFFIX,weatheroffer.com
-DOMAIN-SUFFIX,check.proxyip.cmliussss.net
-DOMAIN-SUFFIX,x-aniu.com
+DOMAIN-SUFFIX,check.proxyip.cmliussss.net #cm
+DOMAIN-SUFFIX,x-aniu.com #阿牛公益节点
 DOMAIN-SUFFIX,3.8.c.b.0.d.0.0.1.0.a.2.ip6.arpa
 DOMAIN-SUFFIX,d.a.7.0.4.2.0.0.0.7.4.0.1.0.0.2.ip6.arpa
+DOMAIN-SUFFIX,firmware-selector.immortalwrt.org #r5s固件
+DOMAIN-SUFFIX,frog02.mikr.us #mikr
+IP-CIDR,2a01:4f9:6b:47e9::2145/32,no-resolve #mikr
+IP-CIDR,2a02:180:6:1::83d/32,no-resolve #euser
+IP-CIDR,2a14:67c0:306:2c4::a/32,no-resolve #alice
+
+
 #谷歌大陆节点代理
 DOMAIN-SUFFIX,gstatic.com
 #谷歌play
@@ -75,7 +82,4 @@ IP-CIDR,1.0.0.1/32,no-resolve
 IP-CIDR,185.222.222.222/32,no-resolve
 IP-CIDR,208.67.222.222/32,no-resolve
 IP-CIDR,208.67.220.220/32,no-resolve
-DOMAIN-SUFFIX,frog02.mikr.us #mikr
-IP-CIDR,2a01:4f9:6b:47e9::2145/32,no-resolve #mikr
-IP-CIDR,2a02:180:6:1::83d/32,no-resolve #euser
-IP-CIDR,2a14:67c0:306:2c4::a/32,no-resolve #alice
+
