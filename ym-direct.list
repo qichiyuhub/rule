@@ -154,19 +154,6 @@ DOMAIN-SUFFIX,im9.com
 DOMAIN-SUFFIX,smtcdns.net
 
 # ByteDance
-DOMAIN-SUFFIX,amemv.com
-DOMAIN-SUFFIX,bdxiguaimg.com
-DOMAIN-SUFFIX,bdxiguastatic.com
-DOMAIN-SUFFIX,byted-static.com
-DOMAIN-SUFFIX,bytedance.com
-DOMAIN-SUFFIX,bytedance.net
-DOMAIN-SUFFIX,bytedns.net
-DOMAIN-SUFFIX,bytednsdoc.com
-DOMAIN-SUFFIX,bytegoofy.com
-DOMAIN-SUFFIX,byteimg.com
-DOMAIN-SUFFIX,bytescm.com
-DOMAIN-SUFFIX,bytetos.com
-DOMAIN-SUFFIX,bytexservice.com
 DOMAIN-SUFFIX,douyin.com
 DOMAIN-SUFFIX,douyincdn.com
 DOMAIN-SUFFIX,douyinpic.com
@@ -270,7 +257,6 @@ DOMAIN-SUFFIX,letvstore.com
 DOMAIN-SUFFIX,hitv.com
 DOMAIN-SUFFIX,hunantv.com
 DOMAIN-SUFFIX,mgtv.com
-
 # MI
 DOMAIN-SUFFIX,duokan.com
 DOMAIN-SUFFIX,mi-img.com
@@ -290,10 +276,6 @@ DOMAIN-SUFFIX,lofter.com
 DOMAIN-SUFFIX,netease.com
 DOMAIN-SUFFIX,ydstatic.com
 DOMAIN-SUFFIX,youdao.com
-
-# PPTV、PPLive
-DOMAIN-SUFFIX,pplive.com
-DOMAIN-SUFFIX,pptv.com
 
 # Sina
 DOMAIN-SUFFIX,leju.com
