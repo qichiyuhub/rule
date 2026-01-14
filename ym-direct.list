@@ -4,7 +4,6 @@ DOMAIN-SUFFIX,lanzov.com
 DOMAIN-SUFFIX,hao123.com
 DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,time.windows.com
-DOMAIN-SUFFIX,firmware-selector.immortalwrt.org #r5s固件
 
 # 域名关键字匹配
 DOMAIN-KEYWORD,baidu
