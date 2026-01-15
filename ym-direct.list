@@ -5,6 +5,10 @@ DOMAIN-SUFFIX,hao123.com
 DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,time.windows.com
 
+#同花顺
+IP-CIDR,159.138.41.254/32,no-resolve
+
+
 # 域名关键字匹配
 DOMAIN-KEYWORD,baidu
 
@@ -29,9 +33,6 @@ DOMAIN-SUFFIX,qhres.com
 DOMAIN-SUFFIX,qhstatic.com
 DOMAIN-SUFFIX,qhupdate.com
 DOMAIN-SUFFIX,so.com
-
-#同花顺
-IP-CIDR,159.138.41.254/32,no-resolve
 
 # 浏览器自动验证码拓展nopecha解除ip封禁
 DOMAIN,api.nopecha.com
