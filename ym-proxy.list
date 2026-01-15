@@ -41,7 +41,9 @@ IP-CIDR,2a02:180:6:1::83d/32,no-resolve #euser
 IP-CIDR,2a14:67c0:306:2c4::a/32,no-resolve #alice
 DOMAIN-SUFFIX,updates-cdn.bravesoftware.com #brave
 DOMAIN-SUFFIX,updates.bravesoftware.com #brave
-DOMAIN-SUFFIX,nic.eu.org
+DOMAIN-SUFFIX,nic.eu.org #二级域名
+DOMAIN-SUFFIX,mail.xoxome.online #风车邮箱
+
 
 IP代理列表
 DOMAIN-SUFFIX,3.8.c.b.0.d.0.0.1.0.a.2.ip6.arpa
