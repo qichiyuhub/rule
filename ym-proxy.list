@@ -30,7 +30,8 @@ DOMAIN-SUFFIX,weatheroffer.com
 DOMAIN-SUFFIX,check.proxyip.cmliussss.net #cm
 DOMAIN-SUFFIX,x-aniu.com #阿牛公益节点
 DOMAIN-SUFFIX,mikr.us #mikr
-DOMAIN-SUFFIX,frog02.mikr.us #mikr
+#mikr
+DOMAIN-SUFFIX,frog02.mikr.us
 DOMAIN-SUFFIX,updates-cdn.bravesoftware.com #brave
 DOMAIN-SUFFIX,updates.bravesoftware.com #brave
 DOMAIN-SUFFIX,nic.eu.org #二级域名
