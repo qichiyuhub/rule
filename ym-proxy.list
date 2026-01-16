@@ -1,4 +1,3 @@
-# 代理补充列表
 # 域名后缀匹配
 DOMAIN-SUFFIX,clubsim.com.hk
 DOMAIN-SUFFIX,qichiyu.com
@@ -26,11 +25,8 @@ DOMAIN-SUFFIX,henghost.com
 DOMAIN-SUFFIX,api.iturrit.com
 DOMAIN-SUFFIX,mixplorer.com
 DOMAIN-SUFFIX,mousegesturesapi.com
-DOMAIN-SUFFIX,google-analytics.com
 DOMAIN-SUFFIX,crxmouse.com
-DOMAIN-SUFFIX,update.googleapis.com
 DOMAIN-SUFFIX,vercel-ip.html.zone
-DOMAIN-SUFFIX,accounts.google.com
 DOMAIN-SUFFIX,weatheroffer.com
 DOMAIN-SUFFIX,check.proxyip.cmliussss.net #cm
 DOMAIN-SUFFIX,x-aniu.com #阿牛公益节点
@@ -52,8 +48,7 @@ IP-CIDR,2a14:67c0:306:2c4::a/32,no-resolve #alice
 
 #谷歌大陆节点代理
 DOMAIN-SUFFIX,gstatic.com
-#谷歌play
-DOMAIN-SUFFIX,googleapis.cn
+
 # NodeSeek
 DOMAIN-SUFFIX,nodeseek.com
 IP-CIDR,198.18.23.57/32,no-resolve
@@ -82,4 +77,3 @@ IP-CIDR,1.0.0.1/32,no-resolve
 IP-CIDR,185.222.222.222/32,no-resolve
 IP-CIDR,208.67.222.222/32,no-resolve
 IP-CIDR,208.67.220.220/32,no-resolve
-
