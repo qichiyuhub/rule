@@ -1,5 +1,2 @@
-#IP
 IP-CIDR,5.5.5.5/32,no-resolve
-
-#DOMAIN
 DOMAIN-SUFFIX,gstatic.com
