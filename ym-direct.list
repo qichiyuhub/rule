@@ -7,7 +7,8 @@ DOMAIN-SUFFIX,time.windows.com
 
 #同花顺
 IP-CIDR,159.138.41.254/32,no-resolve
-
+#finalshell
+IP-CIDR,5.5.5.5/32,no-resolve
 
 # 域名关键字匹配
 DOMAIN-KEYWORD,baidu
