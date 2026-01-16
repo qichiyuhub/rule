@@ -1,1 +1,4 @@
-
+#IP
+IP-CIDR,5.5.5.5/32 #finalshell
+#domain
+#DOMAIN-SUFFIX,gstatic.com
