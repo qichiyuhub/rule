@@ -43,7 +43,7 @@ DOMAIN-SUFFIX,updates-cdn.bravesoftware.com #brave
 DOMAIN-SUFFIX,updates.bravesoftware.com #brave
 DOMAIN-SUFFIX,nic.eu.org #二级域名
 DOMAIN-SUFFIX,mail.xoxome.online #风车邮箱
-DOMAIN-SUFFIX,kadaza.com #导航
+DOMAIN-SUFFIX,www.kadaza.com #导航
 
 #IP代理列表
 DOMAIN-SUFFIX,3.8.c.b.0.d.0.0.1.0.a.2.ip6.arpa
