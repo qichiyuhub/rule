@@ -3,5 +3,5 @@
 注意：1.13版本以后，官方内核 客户端配置文件在官方支持 proxy-providers之前统一使用 substore远程脚本 进行填充，因尽可能做到通用，可能参数并不完美，根据自己情况进行调整。
 
 1.12X版本：客户端配置适配momo，也包含手机和裸核，outbound填充用的有专用后端，substore脚本填充、以及reF1nd支持订阅的版本。  
-1.13X版本：客户端配置适配 官方内核，momo，reF1nd版内核
-1.14X版本：客户端配置适配 官方内核，momo，reF1nd版内核，linux/windows/iphone等不同版本，VPS为自建节点配置
+1.13X版本：客户端配置适配 官方内核，momo，reF1nd版内核  
+1.14X版本：客户端配置适配 官方内核，momo，reF1nd版内核，linux/windows/iphone等不同版本，VPS为自建节点配置  
