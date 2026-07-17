@@ -26,7 +26,6 @@
       {"rule_set": "geosite-cn","server": "ali"}
     ],
     "final": "google",
-    "client_subnet": "223.5.5.0/24",
     "strategy": "prefer_ipv4",
     "independent_cache": true,
     "reverse_mapping": true
