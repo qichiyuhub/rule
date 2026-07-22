@@ -10,13 +10,14 @@
       {"query_type": ["HTTPS", "SVCB"], "action": "reject"},
       {"clash_mode": "Direct", "server": "ali"},
       {"clash_mode": "Global", "server": "fakeip"},
-      {"rule_set": "geosite-fakeipfilter", "server": "ali"},
+      {"rule_set": "geosite-fakeipfilter-cn", "server": "ali"},
       {"query_type": ["A", "AAAA"], "server": "fakeip", "rewrite_ttl": 1},
       {"rule_set": "geosite-cn","server": "ali"}
     ],
     "final": "google",
     "strategy": "prefer_ipv4",
     "independent_cache": true,
+    "cache_capacity": 8192,
     "reverse_mapping": true
   },
   "outbounds": [
@@ -46,10 +47,11 @@
   ],
   "route": {
     "rules": [
-      {"type": "logical", "mode": "or", "rules": [{"domain": "Mijia Cloud"}, {"domain_suffix": "push.apple.com"}, {"rule_set": "geoip-telegram"}], "invert": true, "action": "sniff", "sniffer": ["http", "tls", "quic", "dns"], "timeout": "500ms"},
+      {"type": "logical", "mode": "or", "rules": [{"domain_suffix": "push.apple.com"}, {"rule_set": "geoip-telegram"}], "invert": true, "action": "sniff", "sniffer": ["http", "tls", "quic", "dns"], "timeout": "500ms"},
       {"inbound": "dns-in", "action": "hijack-dns"},
-      {"type": "logical", "mode": "or", "rules": [{"port": 853}, {"protocol": "stun"}], "action": "reject"},
-      {"type": "logical", "mode": "and", "rules": [{"protocol": "quic"}, {"rule_set": "geosite-!cn"}], "action": "reject"},
+      {"ip_is_private": true, "outbound": "直连"},
+      {"type": "logical", "mode": "or", "rules": [{"port": 853}, {"protocol": ["stun", "quic"]}], "action": "reject", "no_drop": true},
+      {"network": "icmp", "action": "resolve"},
       {"network": "icmp", "outbound": "直连"},
       {"ip_is_private": true, "outbound": "直连"},
       {"clash_mode": "Direct", "outbound": "直连"},
@@ -77,7 +79,7 @@
       {"rule_set": "geoip-cn", "outbound": "直连"}
     ],
     "rule_set": [
-      {"tag": "geosite-fakeipfilter", "type": "remote", "format": "source", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/fakeipfilter.json", "download_detour": "直连"},
+      {"tag": "geosite-fakeipfilter-cn", "type": "remote", "format": "source", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/fakeipfilter-cn.json", "download_detour": "直连"},
       {"tag": "geosite-ai", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-!cn.srs", "download_detour": "直连"},
       {"tag": "geosite-youtube", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs", "download_detour": "直连"},
       {"tag": "geosite-google", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs", "download_detour": "直连"},
@@ -101,7 +103,7 @@
       {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/OneOhCloud/one-geoip/rule-set/one-china.srs", "download_detour": "直连"}
     ],
     "final": "漏网之鱼",
-    "auto_detect_interface": false,
+    "auto_detect_interface": true,
     "default_domain_resolver": {"server": "ali"}
   },
   "inbounds": [
@@ -150,12 +152,11 @@
   "experimental": {
     "cache_file": {
       "enabled": true,
-      "path": "/etc/momo/run/cache.db",
       "store_fakeip": true
     },
     "clash_api": {
       "external_controller": "0.0.0.0:9095",
-      "external_ui": "/etc/momo/run/ui",
+      "external_ui": "ui",
       "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "直连",
       "secret": "",
@@ -171,7 +172,7 @@
   },
   "log": {
     "disabled": false,
-    "level": "debug",
+    "level": "info",
     "timestamp": true
   }
 }
