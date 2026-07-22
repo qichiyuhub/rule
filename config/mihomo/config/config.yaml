@@ -3,7 +3,7 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "机场订阅填到这里，两端引号不要去掉，不要填写到下方链接里去！！"
+    url: "订阅url"
     type: http
     interval: 0
     health-check:
@@ -64,7 +64,6 @@ dns:
   enable: true
   cache-algorithm: arc
   ipv6: false
-  respect-rules: true
   enhanced-mode: fake-ip
   fake-ip-range: 28.0.0.0/8
   fake-ip-filter-mode: blacklist
@@ -115,7 +114,6 @@ rules:
   - RULE-SET,private_ip,直连,no-resolve
   - RULE-SET,private_domain,直连
   - DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理
-  - RULE-SET,proxylite,🚀 默认代理
   - RULE-SET,ai,🤖 ChatGPT
   - RULE-SET,github_domain,👨🏿‍💻 GitHub
   - RULE-SET,youtube_domain,📹 YouTube
