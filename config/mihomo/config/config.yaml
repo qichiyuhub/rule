@@ -1,13 +1,11 @@
 # 必读！！！
-# 此版本没有做防泄露处理，如介意请使用另一个名字为configdns的版本
-# 注意规则在满足自己需求情况下，尽量做到精简，不要过度复杂，以免影响性能。
-# 跑裸核用户请自行去掉下方控制面板模块的注释。
+# 此配置不防DNS泄露，想使用防泄漏专业版本请使用同目录下另一个名字为mihomo的版本
 # 机场订阅
 proxy-providers:
   Airport1:
     url: "机场订阅填到这里，两端引号不要去掉，不要填写到下方链接里去！！"
     type: http
-    interval: 86400
+    interval: 0
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -25,22 +23,19 @@ bind-address: "*"
 ipv6: false
 unified-delay: true
 tcp-concurrent: true
-log-level: warning
-global-client-fingerprint: chrome
+log-level: info
 keep-alive-idle: 600
 keep-alive-interval: 15
 profile:
   store-selected: true
   store-fake-ip: true
 
-# 为防止使用插件朋友遇到面板问题，我注释掉了此模块。
-#external-controller: 0.0.0.0:9090
-#secret: ""
-#external-ui: ui
-#external-ui-name: zashboard
-#external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+external-controller: 0.0.0.0:9090
+secret: ""
+external-ui: ui
+external-ui-url: "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
 
-# 嗅探（fakeip下其实可以不用嗅探）
+# 嗅探
 sniffer:
   enable: true
   sniff:
@@ -58,40 +53,35 @@ sniffer:
 # 入站
 tun:
   enable: true
-  # system/gvisor/mixed
   stack: mixed
   dns-hijack: ["any:53", "tcp://any:53"]
-  #使用nikki，混入全部不修改的情况，开启接口指定为nikki
-  #device: nikki
-  #使用仅内核自行修改下面三项为true
-  auto-route: false
-  auto-redirect: false
-  auto-detect-interface: false
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
 
 # DNS模块
 dns:
   enable: true
   cache-algorithm: arc
-  listen: 0.0.0.0:1053
   ipv6: false
   respect-rules: true
   enhanced-mode: fake-ip
-  fake-ip-range: 28.0.0.1/8
+  fake-ip-range: 28.0.0.0/8
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "rule-set:fakeipfilter_domain"
+    - "*"
+    - "+.lan"
+    - "+.local"
+    - "+.market.xiaomi.com"
   default-nameserver:
-    - https://223.5.5.5/dns-query
-  proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
+    - 223.5.5.5
   nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
  
 # 出站策略，根据自己情况调整每个策略里分组排序，增删都可以，比如把美国自动放到第一个，比如删除香港故转，注意别漏掉表情逗号等。
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
-# 没有再使用锚点，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
+# 没有再使用锚点和icon图标，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
 proxy-groups:
   - {name: 🚀 默认代理, type: select, proxies: [🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, 🔯 美国故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 狮城自动, ♻️ 美国自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🌐 全部节点, 直连]}
   - {name: 📹 YouTube, type: select, proxies: [🔯 美国故转, 🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, ♻️ 美国自动, ♻️ 香港自动, ♻️ 日本自动, ♻️ 狮城自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🌐 全部节点, 直连]}
@@ -153,9 +143,7 @@ rule-anchor:
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 rule-providers: 
-  fakeipfilter_domain: {<<: *domain, url: "https://raw.githubusercontent.com/wwqgtxx/clash-rules/release/fakeip-filter.mrs"}
   private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
-  proxylite: { <<: *class, url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/proxy.list"}
   ai: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs" }
   youtube_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
   google_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
