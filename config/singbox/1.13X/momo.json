@@ -4,7 +4,7 @@
       {"tag": "local", "type": "local", "prefer_go": true},
       {"tag": "ali", "type": "https", "server": "223.5.5.5"},
       {"tag": "google", "type": "https", "server": "8.8.8.8", "detour": "默认代理"},
-      {"tag": "fakeip", "type": "fakeip", "inet4_range": "28.0.0.1/8", "inet6_range": "2001:db8::/32"}
+      {"tag": "fakeip", "type": "fakeip", "inet4_range": "198.19.0.0/16", "inet6_range": "2001:db8::/32"}
     ],
     "rules": [
       {"query_type": ["HTTPS", "SVCB"], "action": "reject"},
