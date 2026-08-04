@@ -39,21 +39,40 @@ tun:
 # DNS模块
 dns:
   enable: true
-  cache-algorithm: arc
+  listen: 0.0.0.0:1053
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.0/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "*"
     - "+.lan"
     - "+.local"
     - "+.market.xiaomi.com"
-  default-nameserver:
-    - 223.5.5.5
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+  # 国内优先（阿里 DNS）
   nameserver:
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
+
+  # 国外备用（防止污染）
+  fallback:
+    - https://1.1.1.1/dns-query
+    - https://1.0.0.1/dns-query
+    - https://8.8.8.8/dns-query
+    - https://9.9.9.9/dns-query
+
+  # 强制所有 DNS 走代理（防泄漏关键）
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://1.1.1.1/dns-query
+
+  # 禁止系统 DNS（防泄漏）
+  use-system-hosts: false
+
  
 # 出站策略，根据自己情况调整每个策略里分组排序，增删都可以，比如把美国自动放到第一个，比如删除香港故转，注意别漏掉表情逗号等。
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
