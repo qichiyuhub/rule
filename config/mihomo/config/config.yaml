@@ -3,7 +3,7 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "订阅url"
+    url: "https://sub-house-adu.pages.dev/api/share/fd028770-9c83-462a-85c9-9d67a89c30ee/base?internal=1"
     type: http
     interval: 0
     health-check:
