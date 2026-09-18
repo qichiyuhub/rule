@@ -67,7 +67,7 @@ ntp:
 
 tun:
   enable: true
-  stack: mixed
+  stack: mixed   ##如果内核版本大于v1.19.31，此处可以改为自研协议栈 mips ，理论上性能更好。
   dns-hijack: ["any:53", "tcp://any:53"]
   auto-route: true
   auto-redirect: true
