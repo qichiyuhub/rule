@@ -5,4 +5,6 @@
 
 1.12X版本：客户端配置适配momo，也包含手机和裸核，outbound填充用的有专用后端，substore脚本填充、以及reF1nd支持订阅的版本。  
 1.13X版本：客户端配置适配 官方内核，momo，reF1nd版内核  
-1.14X版本：客户端配置适配 官方内核（mini为纯自建节点专用），momo，reF1nd版内核，linux/windows/iphone等不同版本，VPS为自建节点服务端+客户端配套配置  
+1.14X版本：客户端配置适配 官方内核（mini为纯自建节点专用），momo，reF1nd版内核，linux/windows/iphone等不同版本，VPS为自建节点服务端+客户端配套配置
+
+testing版本，紧跟官方测试版本

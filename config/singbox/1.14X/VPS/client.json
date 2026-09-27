@@ -1,0 +1,169 @@
+{
+  "outbounds": [
+    {
+      "tag": "ZJ-US-Naive",
+      "type": "naive",
+      "server": "test.com",
+      "server_port": 3443,
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "insecure": false
+      },
+      "username": "naivewin",
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    },
+    {
+      "tag": "ZJ-US-AnyTLS",
+      "type": "anytls",
+      "server": "test.com",
+      "server_port": 4443,
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "insecure": false
+      },
+      "idle_session_check_interval": "30s",
+      "idle_session_timeout": "30s",
+      "min_idle_session": 10
+    },
+    {
+      "tag": "ZJ-US-Hysteria2",
+      "type": "hysteria2",
+      "server": "test.com",
+      "server_port": 6443,
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "obfs": {
+        "type": "salamander",
+        "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "insecure": false
+      },
+      "up_mbps": 100,
+      "down_mbps": 600
+    },
+    {
+      "tag": "ZJ-US-TUIC",
+      "type": "tuic",
+      "server": "test.com",
+      "server_port": 7443,
+      "uuid": "e9ee8ee0-dc73-4106-bee1-ce0d07b27eda",
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      },
+      "congestion_control": "bbr"
+    },
+    {
+      "tag": "ZJ-US-Trojan",
+      "type": "trojan",
+      "server": "test.com",
+      "server_port": 5443,
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "insecure": false
+      }
+    },
+    {
+      "tag": "ZJ-US-AnyTLS-Reality",
+      "type": "anytls",
+      "server": "test.com",
+      "server_port": 1443,
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "tls": {
+        "enabled": true,
+        "server_name": "one-piece.com",
+        "insecure": false,
+        "reality": {
+          "enabled": true,
+          "public_key": "zQePZSQ2m2_FwHFRV79JsUzsTX62GYwSALGzwnhCSSg",
+          "short_id": "6ce0993f6735eaa0"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "idle_session_check_interval": "30s",
+      "idle_session_timeout": "30s",
+      "min_idle_session": 10
+    },
+    {
+      "tag": "ZJ-US-VLESS-Reality",
+      "type": "vless",
+      "server": "test.com",
+      "server_port": 443,
+      "uuid": "e9ee8ee0-dc73-4106-bee1-ce0d07b27eda",
+      "tls": {
+        "enabled": true,
+        "server_name": "one-piece.com",
+        "insecure": false,
+        "reality": {
+          "enabled": true,
+          "public_key": "zQePZSQ2m2_FwHFRV79JsUzsTX62GYwSALGzwnhCSSg",
+          "short_id": "6ce0993f6735eaa0"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "flow": "xtls-rprx-vision",
+      "multiplex": {
+        "enabled": true,
+        "padding": true
+      }
+    },
+    {
+      "tag": "ZJ-US-SS-TLS",
+      "type": "shadowsocks",
+      "method": "2022-blake3-aes-256-gcm",
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "detour": "ZJ-US-SS-TLS_shadowtls",
+      "multiplex": {
+        "enabled": true,
+        "protocol": "h2mux",
+        "padding": true
+      }
+    },
+    {
+      "tag": "ZJ-US-SS-TLS_shadowtls",
+      "type": "shadowtls",
+      "server": "test.com",
+      "server_port": 2443,
+      "version": 3,
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "tls": {
+        "enabled": true,
+        "server_name": "one-piece.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "ZJ-US-SS2022",
+      "type": "shadowsocks",
+      "server": "test.com",
+      "server_port": 8080,
+      "method": "2022-blake3-aes-256-gcm",
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "multiplex": {
+        "enabled": true,
+        "padding": true
+      }
+    }
+  ]
+}

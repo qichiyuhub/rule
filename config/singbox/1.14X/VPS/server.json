@@ -1,0 +1,233 @@
+{
+  "certificate_providers": [
+    {
+      "type": "acme",
+      "tag": "cert",
+      "domain": "test.com",
+      "data_directory": "/etc/sing-box/acme",
+      "email": "your-email@example.com",
+      "dns01_challenge": {
+        "provider": "cloudflare",
+        "api_token": "YOUR_CLOUDFLARE_API_TOKEN"
+      }
+    }
+  ],
+  "inbounds": [
+    {
+      "tag": "VLESS-Vision-Reality-in",
+      "type": "vless",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [
+        {
+          "uuid": "e9ee8ee0-dc73-4106-bee1-ce0d07b27eda",
+          "flow": "xtls-rprx-vision"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "one-piece.com",
+        "reality": {
+          "enabled": true,
+          "handshake": {
+            "server": "one-piece.com",
+            "server_port": 443
+          },
+          "private_key": "gFIEpNaRizK1jGXcJfuCFIHnvgVS-DdG3XSnPJGKZ3U",
+          "short_id": [
+            "6ce0993f6735eaa0"
+          ]
+        }
+      },
+      "multiplex": {
+        "enabled": true,
+        "padding": true
+      }
+    },
+    {
+      "tag": "anytls-reality-in",
+      "type": "anytls",
+      "listen": "::",
+      "listen_port": 1443,
+      "users": [
+        {
+          "name": "anything",
+          "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+        }
+      ],
+      "padding_scheme": [
+        "stop=8",
+        "0=34-34",
+        "1=100-400",
+        "2=400-500,c,500-1000,c,500-1000,c,500-1000,c,500-1000",
+        "3=10-10,500-1000",
+        "4=500-1000",
+        "5=500-1000",
+        "6=500-1000",
+        "7=500-1000"
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "one-piece.com",
+        "reality": {
+          "enabled": true,
+          "handshake": {
+            "server": "one-piece.com",
+            "server_port": 443
+          },
+          "private_key": "gFIEpNaRizK1jGXcJfuCFIHnvgVS-DdG3XSnPJGKZ3U",
+          "short_id": [
+            "6ce0993f6735eaa0"
+          ]
+        }
+      }
+    },
+    {
+      "tag": "shadowtls-in",
+      "type": "shadowtls",
+      "listen": "::",
+      "listen_port": 2443,
+      "version": 3,
+      "users": [
+        {
+          "name": "stlswin",
+          "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+        }
+      ],
+      "handshake": {
+        "server": "one-piece.com",
+        "server_port": 443
+      },
+      "strict_mode": true,
+      "detour": "shadowtls-ss-in"
+    },
+    {
+      "tag": "shadowtls-ss-in",
+      "type": "shadowsocks",
+      "listen": "127.0.0.1",
+      "network": "tcp",
+      "method": "2022-blake3-aes-256-gcm",
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "multiplex": {
+        "enabled": true,
+        "padding": true
+      }
+    },
+    {
+      "tag": "naive-in",
+      "type": "naive",
+      "listen": "::",
+      "listen_port": 3443,
+      "users": [
+        {
+          "username": "naivewin",
+          "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "certificate_provider": "cert"
+      }
+    },
+    {
+      "tag": "anytls-in",
+      "type": "anytls",
+      "listen": "::",
+      "listen_port": 4443,
+      "users": [
+        {
+          "name": "anything",
+          "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+        }
+      ],
+      "padding_scheme": [
+        "stop=8",
+        "0=34-34",
+        "1=100-400",
+        "2=400-500,c,500-1000,c,500-1000,c,500-1000,c,500-1000",
+        "3=10-10,500-1000",
+        "4=500-1000",
+        "5=500-1000",
+        "6=500-1000",
+        "7=500-1000"
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "certificate_provider": "cert"
+      }
+    },
+    {
+      "tag": "trojan-in",
+      "type": "trojan",
+      "listen": "::",
+      "listen_port": 5443,
+      "users": [
+        {
+          "name": "trojanwin",
+          "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "certificate_provider": "cert"
+      }
+    },
+    {
+      "tag": "hysteria-in",
+      "type": "hysteria2",
+      "listen": "::",
+      "listen_port": 6443,
+      "obfs": {
+        "type": "salamander",
+        "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+      },
+      "users": [
+        {
+          "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "certificate_provider": "cert"
+      }
+    },
+    {
+      "tag": "tuic-in",
+      "type": "tuic",
+      "listen": "::",
+      "listen_port": 7443,
+      "users": [
+        {
+          "name": "tuicwin",
+          "uuid": "e9ee8ee0-dc73-4106-bee1-ce0d07b27eda",
+          "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+        }
+      ],
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "server_name": "test.com",
+        "alpn": [
+          "h3"
+        ],
+        "certificate_provider": "cert"
+      }
+    },
+    {
+      "tag": "shadowsocks2022-in",
+      "type": "shadowsocks",
+      "listen": "::",
+      "listen_port": 8080,
+      "method": "2022-blake3-aes-256-gcm",
+      "password": "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw=",
+      "multiplex": {
+        "enabled": true,
+        "padding": true
+      }
+    }
+  ]
+}

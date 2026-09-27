@@ -1,0 +1,108 @@
+proxies:
+  # ---- 真证书类 (ACME test.com) ----
+  # naive: mihomo 不支持 naive 协议，留空 (见 client.json)
+
+  - name: "ZJ-US-AnyTLS"
+    type: anytls
+    server: test.com
+    port: 4443
+    password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    udp: true
+    sni: test.com
+    idle-session-check-interval: 30
+    idle-session-timeout: 30
+    min-idle-session: 10
+
+  - name: "ZJ-US-Hysteria2"
+    type: hysteria2
+    server: test.com
+    port: 6443
+    password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    sni: test.com
+    obfs: salamander
+    obfs-password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    up: "100 Mbps"
+    down: "600 Mbps"
+
+  - name: "ZJ-US-TUIC"
+    type: tuic
+    server: test.com
+    port: 7443
+    uuid: e9ee8ee0-dc73-4106-bee1-ce0d07b27eda
+    password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    sni: test.com
+    alpn:
+      - h3
+    congestion-controller: bbr
+    udp-relay-mode: native
+    udp: true
+
+  - name: "ZJ-US-Trojan"
+    type: trojan
+    server: test.com
+    port: 5443
+    password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    sni: test.com
+    udp: true
+
+  # ---- 偷握手类 (reality / shadow-tls) ----
+  - name: "ZJ-US-AnyTLS-Reality"
+    type: anytls
+    server: test.com
+    port: 1443
+    password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    udp: true
+    sni: one-piece.com
+    idle-session-check-interval: 30
+    idle-session-timeout: 30
+    min-idle-session: 10
+    reality-opts:
+      public-key: "zQePZSQ2m2_FwHFRV79JsUzsTX62GYwSALGzwnhCSSg"
+      short-id: 6ce0993f6735eaa0
+    client-fingerprint: chrome
+
+  - name: "ZJ-US-VLESS-Reality"
+    type: vless
+    server: test.com
+    port: 443
+    uuid: e9ee8ee0-dc73-4106-bee1-ce0d07b27eda
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    servername: one-piece.com
+    reality-opts:
+      public-key: "zQePZSQ2m2_FwHFRV79JsUzsTX62GYwSALGzwnhCSSg"
+      short-id: 6ce0993f6735eaa0
+    client-fingerprint: chrome
+    smux:
+      enabled: true
+      padding: true
+
+  - name: "ZJ-US-SS-TLS"
+    type: ss
+    server: test.com
+    port: 2443
+    cipher: 2022-blake3-aes-256-gcm
+    password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    plugin: shadow-tls
+    plugin-opts:
+      host: "one-piece.com"
+      password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+      version: 3
+    smux:
+      enabled: true
+      protocol: h2mux
+      padding: true
+    client-fingerprint: chrome
+
+  # ---- 裸 ss2022 ----
+  - name: "ZJ-US-SS2022"
+    type: ss
+    server: test.com
+    port: 8080
+    cipher: 2022-blake3-aes-256-gcm
+    password: "VhyQor7jFLuLRul4+Q0aXxqME8AMB1jBXXcroTo2JDw="
+    udp: true
+    smux:
+      enabled: true
+      padding: true
