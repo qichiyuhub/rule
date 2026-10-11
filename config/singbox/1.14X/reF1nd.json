@@ -56,7 +56,7 @@
     {"tag": "香港手动", "type": "selector", "outbounds": null, "use_all_providers": true, "include": "港|HK|(?i)Hong", "exclude": "日"},
     {"tag": "美国手动", "type": "selector", "outbounds": null, "use_all_providers": true, "include": "🇺🇸|US|us|美国|美|United States", "exclude": "日|AUS|RUS"},
     {"tag": "手动选择", "type": "selector", "outbounds": null, "use_all_providers": true, "exclude": "网站|流量|地址|剩余|过期|免费|时间|有效|Traffic|ExpireDate|GB|Expire Date"},
-    {"tag": "自动选择", "type": "urltest", "outbounds": [], "url": "https://clients1.google.com/generate_204", "interval": "30m", "tolerance": 100},
+    {"tag": "自动选择", "type": "urltest", "outbounds": null, "fallback": { "enabled": true, "max_delay": "200ms" }, "use_all_providers": true, "interval": "10m","exclude":"网站|流量|地址|剩余|过期|免费|时间|有效|Traffic|ExpireDate|GB|Expire Date"},
     {"tag": "延迟辅助", "type": "urltest", "outbounds": ["直连"], "url": "http://connect.rom.miui.com/generate_204", "interval": "30m"},
     {"tag": "GLOBAL", "type": "selector", "outbounds": ["默认代理", "AI", "YouTube", "Google", "Github", "Telegram", "TikTok", "Netflix", "Wallet", "Steam", "Microsoft", "OneDrive", "Apple", "漏网之鱼", "日本手动", "狮城手动", "香港手动", "美国手动", "手动选择", "自动选择", "延迟辅助", "直连"]},
     {"tag": "直连", "type": "direct", "domain_resolver": "ali"}
