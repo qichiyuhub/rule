@@ -148,7 +148,8 @@
       "secret": "passwd",
       "dashboard": {
         "enabled": true,
-        "path": "/etc/sing-box/dashboard"
+        "path": "/etc/sing-box/dashboard",
+        "download_url": "https://gh-proxy.com/https://github.com/SagerNet/sing-box-dashboard/archive/refs/heads/gh-pages.zip"
       }
     }
   ],
