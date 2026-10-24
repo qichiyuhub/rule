@@ -3,7 +3,7 @@
 # 因为DNS流程较多，尽可能用本地搭建DNS开启乐观缓存。
 # 因为配置里开启了绕过大陆，google商店会无法更新，可以尝试把 "+.googleapis.cn"  "+.xn--ngstr-lra8j.com" 两个域名后缀指定走国外DNS，同时rules里添加走代理，理论上可以解决，或者关闭绕过大陆。
 rule-anchor:
-  P: &P {type: http, interval: 0, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, exclude-filter: "官网|剩余|流量|套餐|订阅|直连|到期时间|GB|Expire Date|Traffic|ExpireDate", proxy: 直连}
+  P: &P {type: http, interval: 0, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, exclude-filter: "官网|剩余|流量|套餐|订阅|直连|到期时间|Expire Date|Traffic|ExpireDate", proxy: 直连}
   # 节点选择
   G1: &G1 {type: select, proxies: [默认代理, 香港故转, 日本故转, 台湾故转, 狮城故转, 美国故转, 香港手动, 日本手动, 台湾手动, 狮城手动, 美国手动, 香港自动, 日本自动, 台湾自动, 狮城自动, 美国自动, 全部自动, 全部手动, 直连]}
   S1: &S1 {type: select, proxies: [香港故转, 日本故转, 台湾故转, 狮城故转, 美国故转, 香港手动, 日本手动, 台湾手动, 狮城手动, 美国手动, 香港自动, 日本自动, 台湾自动, 狮城自动, 美国自动, 全部自动, 全部手动, 直连]}

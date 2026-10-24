@@ -1,0 +1,53 @@
+# 订阅用V2ray/URL格式，不支持mihomo格式。
+subscription {
+    sub: 'https://example.com/sub'
+}
+
+# node {
+#     my_vps: 'hysteria2://密码@vps.example.com:443/?sni=vps.example.com'
+#     relay: 'vless://UUID@us.example.com:443?security=tls&sni=us.example.com -> trojan://密码@hk.example.com:443?sni=hk.example.com' # 链式代理：落地 -> 前置
+# }
+
+# 组名只能用英文；policy 可选 min_moving_avg（移动平均延迟最低）/ min_avg10（近 10 次平均延迟最低）/ min（最近一次延迟最低）/ random（随机）/ fixed(n)（固定组内第 n 个，从 0 数）
+group {
+    Proxy {
+        filter: !name(regex: '官网|剩余|流量|套餐|免费|订阅|到期时间|直连|Expire Date|Traffic|ExpireDate')
+        policy: min_moving_avg
+    }
+}
+
+dns {
+    upstream {
+        remote: 'https://8.8.8.8/dns-query'
+        local: 'https://223.5.5.5/dns-query'
+    }
+    routing {
+        request {
+            qtype(https, svcb) -> reject
+            qname(geosite: cn) -> local
+            qname(geosite: geolocation-!cn) -> remote
+            fallback: remote
+        }
+        response {
+            # remote 解析出国内 IP 时改用 local 重查，拿到就近 CDN
+            upstream(remote) && ip(geoip: cn) -> local
+            fallback: accept
+        }
+    }
+}
+
+routing {
+    dip(224.0.0.0/3, 'ff00::/8') -> direct
+    dip(geoip: private, geoip: cn) -> direct
+    l4proto(udp) && dport(443) -> block
+    domain(geosite: cn) -> direct
+    fallback: Proxy
+}
+
+global {
+    lan_interface: ens18 # 改成自己的局域网网卡，ip a 查看
+    wan_interface: auto
+    auto_config_kernel_parameter: true
+    tls_implementation: utls
+    bootstrap_resolver: '119.29.29.29:53'
+}
