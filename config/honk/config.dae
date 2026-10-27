@@ -1,7 +1,6 @@
 # 订阅支持V2ray/URL、mihomo等格式。
 subscription {
     sub: 'https://example.com/sub'
-    route: direct
 }
 
 # node {
