@@ -1,0 +1,171 @@
+# 订阅支持V2ray/URL、mihomo等格式。
+subscription {
+    sub: 'https://example.com/sub'
+    route: direct
+}
+
+# node {
+#     my_vps: 'hysteria2://密码@vps.example.com:443/?sni=vps.example.com'
+# }
+
+# policy 可选 select（面板手动选，默认）/ min_moving_avg（延迟最低）/ fallback（按顺序取第一个存活）/ loadbalance（轮询）/ score（按实际连接质量评分）；final：所选节点不可用时改走的组
+group {
+    Proxy {
+        filter: name(regex: '🇭🇰|HK|hk|香港|港|HongKong') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    AI {
+        filter: name(regex: '🇺🇸|US|美国|美|United States') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    YouTube {
+        filter: name(regex: '🇭🇰|HK|hk|香港|港|HongKong') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Google {
+        filter: name(regex: '🇭🇰|HK|hk|香港|港|HongKong') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Github {
+        filter: name(regex: '🇯🇵|JP|jp|日本|日|Japan') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Telegram {
+        filter: name(regex: '🇭🇰|HK|hk|香港|港|HongKong') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    TikTok {
+        filter: name(regex: '🇺🇸|US|美国|美|United States') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Netflix {
+        filter: name(regex: '🇺🇸|US|美国|美|United States') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Wallet {
+        filter: name(regex: '🇺🇸|US|美国|美|United States') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Steam {
+        filter: name(regex: '🇭🇰|HK|hk|香港|港|HongKong') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Microsoft {
+        filter: name(regex: '🇯🇵|JP|jp|日本|日|Japan') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    OneDrive {
+        filter: name(regex: '🇯🇵|JP|jp|日本|日|Japan') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Apple {
+        filter: name(regex: '🇭🇰|HK|hk|香港|港|HongKong') && !name(regex: '排除')
+        final: Final
+        interrupt_connections: true
+    }
+    Final {
+        filter: !name(regex: '官网|剩余|流量|套餐|免费|订阅|到期时间|直连|Expire Date|Traffic|ExpireDate')
+        policy: score
+    }
+}
+
+dns {
+    upstream {
+        remote: 'https://8.8.8.8/dns-query'
+        local: 'https://223.5.5.5/dns-query'
+    }
+    routing {
+        request {
+            qtype(https, svcb) -> reject
+            qtype(aaaa) -> reject
+            qname(suffix: googleapis.cn, suffix: xn--ngstr-lra8j.com) -> remote
+            qname(geosite: cn, geosite: microsoft@cn, geosite: apple@cn, geosite: private) -> local
+            qname(geosite: geolocation-!cn) -> remote
+            fallback: remote
+        }
+        response {
+            # remote 解析出国内 IP 时改用 local 重查，拿到就近 CDN
+            upstream(remote) && ip(geoip: cn) -> local
+            fallback: accept
+        }
+    }
+}
+
+routing {
+    dip(geoip: private, geoip: cn) && !dport(53, 853) -> direct(must)
+    dport(853) -> block
+    l4proto(udp) && dport(443) -> block
+    domain(suffix: googleapis.cn, suffix: xn--ngstr-lra8j.com) -> Google
+    domain(suffix: withgoogle.com, suffix: notebooklm.google, geosite: category-ai-!cn) -> AI
+    domain(geosite: youtube) -> YouTube
+    domain(geosite: google) -> Google
+    domain(geosite: github) -> Github
+    domain(geosite: onedrive) -> OneDrive
+    domain(geosite: microsoft@cn) -> direct
+    domain(geosite: microsoft) -> Microsoft
+    domain(geosite: apple@cn) -> direct
+    domain(geosite: apple) -> Apple
+    domain(geosite: telegram) -> Telegram
+    domain(geosite: tiktok) -> TikTok
+    domain(geosite: netflix) -> Netflix
+    domain(geosite: paypal, geosite: binance, geosite: okx, geosite: category-cryptocurrency) -> Wallet
+    domain(geosite: steam@cn) -> direct
+    domain(geosite: steam) -> Steam
+    domain(geosite: geolocation-!cn) -> Proxy
+    dip(geoip: telegram) -> Telegram
+    fallback: Final
+}
+
+global {
+    lan_interface: ens18 # 改成自己的局域网网卡，ip a 查看
+    wan_interface: auto
+    # 面板账号、节点选择存这里；OpenWrt 的 /var 在内存里，重启会丢
+    data_dir: '/etc/honk'
+    dial_mode: domain
+    tls_implementation: utls
+    bootstrap_resolver: '119.29.29.29:53'
+    log_level: info
+    check_interval: 30s
+    check_tolerance: 50ms
+}
+
+assets {
+    # 订阅、geodata 直连下载；首次启动代理组还没节点，走代理会拉不下来
+    route: direct
+    subscription {
+        ua: 'clash.meta/1.19.30'
+        interval: 86400s
+        cache: true
+    }
+    geodata {
+        geosite: 'https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geosite.dat'
+        geoip: 'https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geoip.dat'
+    }
+}
+
+# doona 面板：http://路由器IP:9090/ui/，首次打开创建管理员
+experimental {
+    native_api {
+        enabled: true
+        listen: '0.0.0.0:9090'
+        password_auth: true
+        config_write: true
+        ui: embedded
+    }
+    cache_file {
+        enabled: true
+        store_dns: true
+    }
+}
