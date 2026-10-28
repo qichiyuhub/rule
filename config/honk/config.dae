@@ -1,6 +1,8 @@
 # 订阅支持V2ray/URL、mihomo等格式。
 subscription {
-    sub: 'https://example.com/sub'
+    sub: 'https://example.com/sub' {
+        route: direct
+    }
 }
 
 # node {
@@ -141,8 +143,6 @@ global {
 }
 
 assets {
-    # 订阅、geodata 直连下载；首次启动代理组还没节点，走代理会拉不下来
-    route: direct
     subscription {
         ua: 'clash.meta/1.19.30'
         interval: 86400s
