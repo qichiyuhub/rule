@@ -1,8 +1,17 @@
-# 订阅支持V2ray/URL、mihomo等格式。
+# 订阅支持V2ray/URL、mihomo等格式，多机场按照示例复制模块改机场名字即可。
 subscription {
-    sub: 'https://example.com/sub' {
+    sub: '订阅链接' {
+        ua: 'clash.meta/1.19.30'
+        interval: 0s
+        cache: false
         route: direct
     }
+    # sub1: '订阅链接' {
+    #     ua: 'clash.meta/1.19.30'
+    #     interval: 86400s
+    #     cache: false
+    #     route: direct
+    # }
 }
 
 # node {
@@ -130,9 +139,8 @@ routing {
 }
 
 global {
-    lan_interface: ens18 # 改成自己的局域网网卡，ip a 查看
+    lan_interface: eth0 # 改成自己的局域网网卡，ip a 查看
     wan_interface: auto
-    # 面板账号、节点选择存这里；OpenWrt 的 /var 在内存里，重启会丢
     data_dir: '/etc/honk'
     dial_mode: domain
     tls_implementation: utls
@@ -143,14 +151,16 @@ global {
 }
 
 assets {
+    route: direct
     subscription {
         ua: 'clash.meta/1.19.30'
-        interval: 86400s
-        cache: true
+        interval: 0s
+        cache: false
     }
     geodata {
         geosite: 'https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geosite.dat'
         geoip: 'https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geoip.dat'
+        route: direct
     }
 }
 
