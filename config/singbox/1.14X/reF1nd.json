@@ -2,9 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/reF1nd/sing-box/reF1nd-testing/docs/schema.json",
   "providers": [
     {
-      "tag": "",
+      "tag": "机场名称",
       "type": "remote",
-      "url": "",
+      "url": "机场链接",
       "health_check": {"enabled":true,"url":"https://www.gstatic.com/generate_204","interval":"10m","timeout":"3s"},
       "exclude": "官网|剩余|流量|套餐|免费|订阅|全球直连|到期时间|Expire Date|Traffic|ExpireDate",
       "http_client": "直连下载",
